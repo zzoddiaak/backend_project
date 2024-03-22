@@ -1,7 +1,7 @@
 
 CREATE TABLE IF NOT EXISTS public.sessions
 (
-    id integer PRIMARY KEY,
+    id serial PRIMARY KEY,
     psychologist_id integer,
     client_id integer,
     start_session timestamp with time zone,

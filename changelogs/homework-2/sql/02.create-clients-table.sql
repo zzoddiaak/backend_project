@@ -2,7 +2,7 @@
 
 CREATE TABLE IF NOT EXISTS public.clients
 (
-    id integer PRIMARY KEY,
+    id serial PRIMARY KEY,
     user_id integer UNIQUE,
     client_card_id integer UNIQUE,
     CONSTRAINT "user" FOREIGN KEY (id) REFERENCES public.users (id),

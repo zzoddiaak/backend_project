@@ -9,6 +9,3 @@ CREATE TABLE IF NOT EXISTS public.reviews
 );
 
 
-SELECT *
-FROM reviews rv
-INNER JOIN sessions s ON rv.session_id = s.id;

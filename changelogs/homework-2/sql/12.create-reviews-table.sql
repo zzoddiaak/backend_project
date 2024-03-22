@@ -1,7 +1,7 @@
 
 CREATE TABLE IF NOT EXISTS public.reviews
 (
-    id integer PRIMARY KEY,
+    id serial PRIMARY KEY,
     session_id integer UNIQUE,
     rating integer,
     comment_reviews text,

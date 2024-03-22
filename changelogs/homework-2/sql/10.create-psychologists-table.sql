@@ -10,8 +10,5 @@ CREATE TABLE IF NOT EXISTS public.psychologists
     FOREIGN KEY (user_id) REFERENCES public.users (id)
 );
 
-SELECT *
-FROM psychologists p
-INNER JOIN users u ON p.user_id = u.id;
 
 

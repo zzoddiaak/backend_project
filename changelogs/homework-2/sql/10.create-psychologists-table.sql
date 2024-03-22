@@ -2,7 +2,7 @@
 
 CREATE TABLE IF NOT EXISTS public.psychologists
 (
-    id integer PRIMARY KEY,
+    id serial PRIMARY KEY,
     user_id integer UNIQUE,
     experience integer,
     hourly_rate numeric(5, 2),

@@ -2,7 +2,7 @@
 
 CREATE TABLE IF NOT EXISTS public.users
 (
-    id integer PRIMARY KEY,
+    id serial PRIMARY KEY,
     firstname character varying(20),
     secondname character varying(20),
     user_password character varying(30),

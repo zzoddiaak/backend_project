@@ -2,7 +2,7 @@
 
 CREATE TABLE IF NOT EXISTS public.sessions_requests
 (
-    id integer PRIMARY KEY,
+    id serialPRIMARY KEY,
     psychologist_id integer,
     client_id integer,
     request_date date,

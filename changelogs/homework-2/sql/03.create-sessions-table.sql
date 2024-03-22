@@ -14,11 +14,4 @@ CREATE TABLE IF NOT EXISTS public.sessions
     FOREIGN KEY (order_id) REFERENCES public.orders (id)
 );
 
-SELECT *
-FROM sessions s
-LEFT JOIN psychologists p ON s.psychologist_id = p.id
-LEFT JOIN clients c ON s.client_id = c.id
-LEFT JOIN courses cr ON s.course_id = cr.id
-LEFT JOIN orders o ON s.order_id = o.id;
-
 

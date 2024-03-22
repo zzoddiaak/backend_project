@@ -1,7 +1,7 @@
 
 CREATE TABLE IF NOT EXISTS public.payments
 (
-    id integer PRIMARY KEY,
+    id serial PRIMARY KEY,
     user_id integer,
     session_id integer,
     payment_status_id integer,

@@ -2,7 +2,7 @@
 
 CREATE TABLE IF NOT EXISTS public.clients_cards
 (
-    id integer PRIMARY KEY,
+    id serial PRIMARY KEY,
     psychologist_id integer,
     diagnos character varying(255),
     recommendations text,

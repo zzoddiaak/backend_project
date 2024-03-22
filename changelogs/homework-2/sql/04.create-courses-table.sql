@@ -2,7 +2,7 @@
 
 CREATE TABLE IF NOT EXISTS public.courses
 (
-    id integer PRIMARY KEY,
+    id serial PRIMARY KEY,
     course_name character varying(255),
     course_price numeric(5, 2),
     order_id integer,

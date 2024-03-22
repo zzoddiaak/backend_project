@@ -85,4 +85,8 @@
         <sqlFile encoding="utf8" path="./sql/19.create-ins-insert.sql" relativeToChangelogFile="true"/>
     </changeSet>
 
+	<changeSet id="homework-2-sel" author="postgres">
+        <sqlFile encoding="utf8" path="./sql/20.create-sel-select.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+	
 </databaseChangeLog> 

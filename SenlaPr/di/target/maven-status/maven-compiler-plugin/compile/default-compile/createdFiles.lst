@@ -1,0 +1,13 @@
+org/example/factory/ObjectFactory.class
+org/example/config/impl/AutowiredSetterAnnotationObjectConfigurator.class
+org/example/config/impl/ValueAnnotationObjectConfigurator.class
+org/example/annotations/Component.class
+org/example/config/impl/AutowiredConstructorAnnotationObjectConfigurator.class
+org/example/config/Config.class
+org/example/annotations/Autowired.class
+org/example/annotations/Value.class
+org/example/Application.class
+org/example/config/impl/JavaConfig.class
+org/example/context/ApplicationContext.class
+org/example/config/impl/AutowiredAnnotationObjectConfigurator.class
+org/example/config/ObjectConfigurator.class

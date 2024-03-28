@@ -1,0 +1,13 @@
+/home/daniil/Documents/Senla/Senla/di/src/main/java/senla/Application.java
+/home/daniil/Documents/Senla/Senla/di/src/main/java/senla/config/implemet/AutowiredAnnotationObjectConfigurator.java
+/home/daniil/Documents/Senla/Senla/di/src/main/java/senla/annotations/Component.java
+/home/daniil/Documents/Senla/Senla/di/src/main/java/senla/annotations/Value.java
+/home/daniil/Documents/Senla/Senla/di/src/main/java/senla/config/implemet/AutowiredSetterAnnotationObjectConfigurator.java
+/home/daniil/Documents/Senla/Senla/di/src/main/java/senla/config/implemet/AutowiredConstructorAnnotationObjectConfigurator.java
+/home/daniil/Documents/Senla/Senla/di/src/main/java/senla/config/Config.java
+/home/daniil/Documents/Senla/Senla/di/src/main/java/senla/config/implemet/ValueAnnotationObjectConfigurator.java
+/home/daniil/Documents/Senla/Senla/di/src/main/java/senla/config/implemet/JavaConfig.java
+/home/daniil/Documents/Senla/Senla/di/src/main/java/senla/annotations/Autowired.java
+/home/daniil/Documents/Senla/Senla/di/src/main/java/senla/context/ApplicationContext.java
+/home/daniil/Documents/Senla/Senla/di/src/main/java/senla/factory/ObjectFactory.java
+/home/daniil/Documents/Senla/Senla/di/src/main/java/senla/config/ObjectConfigurer.java

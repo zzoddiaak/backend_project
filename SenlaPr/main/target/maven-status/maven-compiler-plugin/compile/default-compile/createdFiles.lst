@@ -1,7 +1,0 @@
-org/example/Main.class
-org/example/service/Serviceinterface.class
-org/example/controller/Controller.class
-org/example/repository/impl/Dbinterfaceimpl.class
-org/example/service/impl/Serviceinterfaceimpl.class
-org/example/repository/Dbinterface.class
-org/example/entity/ParametersHolders.class

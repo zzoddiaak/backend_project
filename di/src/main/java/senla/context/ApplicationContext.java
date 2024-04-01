@@ -30,21 +30,23 @@ public class ApplicationContext {
         }
     }
     public <T> T getObject(Class<T> type){
-        if (cache.containsKey(type)){
-            return (T) cache.get(type);
-        }
-        Class<? extends T> implClass = type;
+    if (cache.containsKey(type)){
+        return (T) cache.get(type);
+    }
+    
+    Class<? extends T> implClass = type;
 
         if (type.isInterface()){
             implClass = config.getImplClass(type);
         }
-        T t = factory.createObject(implClass);
+    
         if (implClass.isAnnotationPresent(Component.class)){
+            T t = factory.createObject(implClass);
             cache.put(type, t);
+            return t;
+        } else {
+            return null; 
         }
-
-
-
-        return t;
     }
+
 }

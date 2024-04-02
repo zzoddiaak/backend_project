@@ -101,9 +101,5 @@ public class ObjectFactory {
         }
     }
 
-    public static class ObjectInstantiationException extends RuntimeException {
-        public ObjectInstantiationException(String message, Throwable cause) {
-            super(message, cause);
-        }
-    }
+  
 }

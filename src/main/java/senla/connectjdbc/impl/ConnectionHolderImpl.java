@@ -7,12 +7,15 @@ import senla.connectjdbc.ConnectionHolder;
 import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 @Component
 public class ConnectionHolderImpl implements ConnectionHolder {
 
     private final DataSource dataSource;
     private final ThreadLocal<Connection> threadLocalConnection = new ThreadLocal<>();
+    private final List<Connection> connectionPool = new ArrayList<>();
 
     @Autowired
     public ConnectionHolderImpl(DataSource dataSource) {
@@ -21,10 +24,12 @@ public class ConnectionHolderImpl implements ConnectionHolder {
 
     @Override
     public Connection getConnection() throws SQLException {
-        if (threadLocalConnection.get() == null || threadLocalConnection.get().isClosed()) {
-            threadLocalConnection.set(dataSource.getConnection());
+        Connection connection = threadLocalConnection.get();
+        if (connection == null || connection.isClosed()) {
+            connection = getConnectionFromPool();
+            threadLocalConnection.set(connection);
         }
-        return threadLocalConnection.get();
+        return connection;
     }
 
     @Override
@@ -63,5 +68,19 @@ public class ConnectionHolderImpl implements ConnectionHolder {
             connection.close();
         }
         threadLocalConnection.remove();
+    }
+
+    private synchronized Connection getConnectionFromPool() throws SQLException {
+        if (connectionPool.isEmpty()) {
+            return dataSource.getConnection();
+        } else {
+            return connectionPool.remove(connectionPool.size() - 1);
+        }
+    }
+
+    public synchronized void releaseConnection(Connection connection) {
+        if (connection != null) {
+            connectionPool.add(connection);
+        }
     }
 }

@@ -3,6 +3,7 @@ package senla.connectjdbc.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import senla.connectjdbc.ConnectionHolder;
+import javax.annotation.PreDestroy;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
@@ -65,7 +66,7 @@ public void commitTransaction() throws SQLException {
         connection.rollback();
         connection.setAutoCommit(true);
     }
-
+    @PreDestroy
     @Override
     public void closeConnection() throws SQLException {
         Connection connection = threadLocalConnection.get();

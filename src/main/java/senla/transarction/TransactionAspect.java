@@ -7,7 +7,6 @@ import org.aspectj.lang.annotation.Aspect;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import senla.connectjdbc.ConnectionHolder;
-
 @Aspect
 @Component
 public class TransactionAspect {
@@ -30,8 +29,12 @@ public class TransactionAspect {
             connectionHolder.rollbackTransaction();
             throw e;
         } finally {
-            connectionHolder.closeConnection();
+            if (!connectionHolder.isTransactionOpen()) {
+                connectionHolder.closeConnection();
+            }
         }
         return result;
     }
 }
+
+

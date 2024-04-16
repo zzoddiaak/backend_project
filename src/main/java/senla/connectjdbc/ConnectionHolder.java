@@ -14,4 +14,6 @@ public interface ConnectionHolder {
     void rollbackTransaction() throws SQLException;
 
     void closeConnection() throws SQLException;
+    void releaseConnection(Connection connection);
+    boolean isTransactionOpen();
 }

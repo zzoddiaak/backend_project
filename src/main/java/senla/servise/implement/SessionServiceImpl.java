@@ -15,7 +15,7 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class SessionServiceImpl implements SessionService {
-    private final SessionRepository sessionRepository;
+    private final JdbcSessionRepositories sessionRepository;
     @Transaction
     @Override
     public List<SessionShortDTO> findAll() {

@@ -3,8 +3,8 @@ package senla.connectjdbc.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import senla.connectjdbc.ConnectionHolder;
-import javax.annotation.PreDestroy;
 
+import javax.annotation.PreDestroy;
 import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -42,19 +42,19 @@ public class ConnectionHolderImpl implements ConnectionHolder {
         connection.setAutoCommit(false);
     }
 
-   @Override
-public void commitTransaction() throws SQLException {
-    Connection connection = getConnection();
-    if (connection.getAutoCommit()) {
-        throw new IllegalStateException("No transaction opened for this thread");
+    @Override
+    public void commitTransaction() throws SQLException {
+        Connection connection = getConnection();
+        if (connection.getAutoCommit()) {
+            throw new IllegalStateException("No transaction opened for this thread");
+        }
+        try {
+            connection.commit();
+        } finally {
+            releaseConnection(connection);
+            connection.setAutoCommit(true);
+        }
     }
-    try {
-        connection.commit();
-    } finally {
-        releaseConnection(connection);
-        connection.setAutoCommit(true);
-    }
-}
 
 
     @Override
@@ -66,6 +66,7 @@ public void commitTransaction() throws SQLException {
         connection.rollback();
         connection.setAutoCommit(true);
     }
+
     @PreDestroy
     @Override
     public void closeConnection() throws SQLException {
@@ -85,8 +86,22 @@ public void commitTransaction() throws SQLException {
     }
 
     public synchronized void releaseConnection(Connection connection) {
+        if (connection != null && isTransactionOpen()) {
+            return;
+        }
         if (connection != null) {
             connectionPool.add(connection);
         }
     }
+    public boolean isTransactionOpen() {
+        try {
+            Connection connection = threadLocalConnection.get();
+            return connection != null && !connection.getAutoCommit();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+
 }

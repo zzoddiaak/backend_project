@@ -44,17 +44,20 @@ public class ConnectionHolderImpl implements ConnectionHolder {
 
     @Override
     public void commitTransaction() throws SQLException {
-        Connection connection = getConnection();
-        if (connection.getAutoCommit()) {
-            throw new IllegalStateException("No transaction opened for this thread");
-        }
-        try {
-            connection.commit();
-        } finally {
+    Connection connection = getConnection();
+    if (connection.getAutoCommit()) {
+        throw new IllegalStateException("No transaction opened for this thread");
+    }
+    try {
+        connection.commit();
+    } finally {
+        connection.setAutoCommit(true);
+        if (!connectionHolder.isTransactionOpen()) {
             releaseConnection(connection);
-            connection.setAutoCommit(true);
         }
     }
+}
+
 
 
     @Override

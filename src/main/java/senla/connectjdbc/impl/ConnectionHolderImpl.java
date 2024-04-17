@@ -52,9 +52,8 @@ public class ConnectionHolderImpl implements ConnectionHolder {
         connection.commit();
     } finally {
         connection.setAutoCommit(true);
-        if (!connectionHolder.isTransactionOpen()) {
             releaseConnection(connection);
-        }
+        
     }
 }
 

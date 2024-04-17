@@ -31,6 +31,8 @@ public class TransactionAspect {
         } finally {
             if (!connectionHolder.isTransactionOpen()) {
                 connectionHolder.closeConnection();
+                connectionHolder.releaseConnection(threadLocalConnection.get());
+
             }
         }
         return result;

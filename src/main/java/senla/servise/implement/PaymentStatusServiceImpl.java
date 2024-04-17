@@ -26,21 +26,28 @@ public class PaymentStatusServiceImpl implements PaymentStatusService {
 
     @Override
     public PaymentStatusDTO findById(long uuid) {
-        return PaymentStatusMapper.convertToDto(paymentStatusRepository.findById(uuid));
-    }
-
-    @Override
-    public void save(PaymentStatusDTOToEntity object) {
-        paymentStatusRepository.save(PaymentStatusMapper.createPaymentStatusDto(object));
-    }
-
-    @Override
-    public void update(long uuid, PaymentStatusDTOToEntity updateDTO) {
         PaymentStatus paymentStatus = paymentStatusRepository.findById(uuid);
-        if (updateDTO.getStatusPayment() != null) {
-            paymentStatus.setStatus(StatusPayment.valueOf(String.valueOf(updateDTO.getStatusPayment())));
-        }
+        return paymentStatus != null ? PaymentStatusMapper.convertToDto(paymentStatus) : null;
+    }
+
+    @Override
+    public boolean save(PaymentStatusDTOToEntity object) {
+        PaymentStatus paymentStatus = PaymentStatusMapper.createPaymentStatusDto(object);
         paymentStatusRepository.save(paymentStatus);
+        return paymentStatus.getId() != null;
+    }
+
+    @Override
+    public boolean update(long uuid, PaymentStatusDTOToEntity updateDTO) {
+        PaymentStatus paymentStatus = paymentStatusRepository.findById(uuid);
+        if (paymentStatus != null) {
+            if (updateDTO.getStatusPayment() != null) {
+                paymentStatus.setStatus(StatusPayment.valueOf(String.valueOf(updateDTO.getStatusPayment())));
+            }
+            paymentStatusRepository.save(paymentStatus);
+            return true;
+        }
+        return false;
     }
 
     @Override
@@ -48,3 +55,4 @@ public class PaymentStatusServiceImpl implements PaymentStatusService {
         paymentStatusRepository.deleteById(uuid);
     }
 }
+

@@ -10,34 +10,46 @@ import senla.repository.iface.CourseRepository;
 import senla.servise.CourseService;
 
 import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class CourseServiceImpl implements CourseService {
     private final CourseRepository courseRepository;
+
     @Override
-    public List<CourseShortInfoDTO> findAll(){
+    public List<CourseShortInfoDTO> findAll() {
         return courseRepository.findAll().stream()
                 .map(CourseMapper::convertToShortDto)
                 .toList();
+    }
 
-    }
     @Override
-    public CourseShortInfoDTO findById(long uuid){
-        return CourseMapper.convertToShortDto(courseRepository.findById(uuid));
+    public CourseShortInfoDTO findById(long uuid) {
+        Course course = courseRepository.findById(uuid);
+        return course != null ? CourseMapper.convertToShortDto(course) : null;
     }
+
     @Override
-    public void save(CourseDTOToEntity object){
-        courseRepository.save(CourseMapper.createCourseDto(object));
+    public boolean save(CourseDTOToEntity object) {
+        Course course = CourseMapper.createCourseDto(object);
+        courseRepository.save(course);
+        return course.getId() != null;
     }
+
     @Override
-    public void update(long uuid, CourseDTOToEntity updateDTO){
-            Course course = courseRepository.findById(uuid);
-        if (!updateDTO.getCourseName().isEmpty()) course.setCourseName(updateDTO.getCourseName());
-        if (updateDTO.getCoursePrice() != null) course.setCoursePrice(updateDTO.getCoursePrice());
+    public boolean update(long uuid, CourseDTOToEntity updateDTO) {
+        Course course = courseRepository.findById(uuid);
+        if (course != null) {
+            if (!updateDTO.getCourseName().isEmpty()) course.setCourseName(updateDTO.getCourseName());
+            if (updateDTO.getCoursePrice() != null) course.setCoursePrice(updateDTO.getCoursePrice());
+            courseRepository.save(course);
+            return true;
+        }
+        return false;
     }
+
     @Override
     public void deleteById(long uuid){
         courseRepository.deleteById(uuid);
     }
-
 }

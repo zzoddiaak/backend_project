@@ -1,6 +1,5 @@
-package senla.repository.iface;
+package senla.repository.api;
 
-import senla.entities.Client;
 import senla.entities.RequestStatus;
 
 import java.util.List;

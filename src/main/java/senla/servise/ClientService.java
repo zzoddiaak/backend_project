@@ -8,6 +8,8 @@ import java.util.List;
 public interface ClientService {
     List<ClientShortInfoDTO> findAll();
     ClientShortInfoDTO findById(long uuid);
-    void save(ClientDTOToEntity object);
+    boolean save(ClientDTOToEntity object);
     void deleteById(long uuid);
+
 }
+

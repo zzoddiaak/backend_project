@@ -10,35 +10,49 @@ import senla.repository.iface.ClientCardRepository;
 import senla.servise.ClientCardService;
 
 import java.util.List;
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 public class ClientCardServiceImpl implements ClientCardService {
     private final ClientCardRepository clientCardRepository;
 
     @Override
-    public List<ClientCardDTO> findAll(){
+    public List<ClientCardDTO> findAll() {
         return clientCardRepository.findAll().stream()
                 .map(ClientCardMapper::convertToDto)
                 .toList();
+    }
 
-    }
     @Override
-    public ClientCardDTO findById(long uuid){
-        return ClientCardMapper.convertToDto(clientCardRepository.findById(uuid));
-    }
-    @Override
-    public void save(ClientCardDTOToEntity object){
-        clientCardRepository.save(ClientCardMapper.createClientCardDto(object));
-    }
-    @Override
-    public void update(long uuid, ClientCardDTOToEntity updateDTO){
+    public ClientCardDTO findById(long uuid) {
         ClientCard clientCard = clientCardRepository.findById(uuid);
-        if (!updateDTO.getDiagnosis().isEmpty()) clientCard.setDiagnos(updateDTO.getDiagnosis());
-        if (!updateDTO.getRecommendations().isEmpty()) clientCard.setRecommendations(updateDTO.getRecommendations());
+        return clientCard != null ? ClientCardMapper.convertToDto(clientCard) : null;
     }
+
+    @Override
+    public boolean save(ClientCardDTOToEntity object) {
+        ClientCard clientCard = ClientCardMapper.createClientCardDto(object);
+        clientCardRepository.save(clientCard);
+        return clientCard.getId() != null;
+    }
+
+    @Override
+    public boolean update(long uuid, ClientCardDTOToEntity updateDTO) {
+        ClientCard clientCard = clientCardRepository.findById(uuid);
+        if (clientCard != null) {
+            if (!updateDTO.getDiagnosis().isEmpty()) clientCard.setDiagnos(updateDTO.getDiagnosis());
+            if (!updateDTO.getRecommendations().isEmpty()) clientCard.setRecommendations(updateDTO.getRecommendations());
+            clientCardRepository.save(clientCard);
+            return true;
+        }
+        return false;
+    }
+
     @Override
     public void deleteById(long uuid){
         clientCardRepository.deleteById(uuid);
     }
-
 }
+
+

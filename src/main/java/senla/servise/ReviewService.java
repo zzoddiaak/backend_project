@@ -8,8 +8,9 @@ import java.util.List;
 public interface ReviewService {
     List<ReviewDTO> findAll();
     ReviewDTO findById(long uuid);
-    void save(ReviewDTOToEntity object);
-    void update(long uuid, ReviewDTOToEntity updateDTO);
-
+    boolean save(ReviewDTOToEntity object);
+    boolean update(long uuid, ReviewDTOToEntity updateDTO);
     void deleteById(long uuid);
+
 }
+

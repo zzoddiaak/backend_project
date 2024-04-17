@@ -8,7 +8,9 @@ import java.util.List;
 public interface PsychologistService {
     List<PsychologistShortDTO> findAll();
     PsychologistShortDTO findById(long uuid);
-    void save(PsychologistDTOToEntity object);
-    void update(long uuid, PsychologistDTOToEntity updateDTO);
+    boolean save(PsychologistDTOToEntity object);
+    boolean update(long uuid, PsychologistDTOToEntity updateDTO);
     void deleteById(long uuid);
+
 }
+

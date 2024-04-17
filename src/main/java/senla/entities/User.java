@@ -10,7 +10,7 @@ import lombok.*;
 public class User extends Entity{
     private String firstname;
     private String secondname;
-    private String user_password;
+    private String userPassword;
     private String email;
     private Role role;
 

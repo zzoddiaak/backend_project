@@ -15,30 +15,47 @@ import java.util.List;
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
+
     @Override
-    public List<UserShortInfoDTO> findAll(){
+    public List<UserShortInfoDTO> findAll() {
         return userRepository.findAll().stream()
                 .map(UserMapper::convertToShortDto)
                 .toList();
+    }
 
-    }
     @Override
-    public UserShortInfoDTO findById(long uuid){
-        return UserMapper.convertToShortDto(userRepository.findById(uuid));
-    }
-    @Override
-    public void save(UserDTOToEntity object){
-        userRepository.save(UserMapper.createUserDto(object));
-    }
-    @Override
-    public void update(long uuid, UserDTOToEntity userUpdateDTO){
+    public UserShortInfoDTO findById(long uuid) {
         User user = userRepository.findById(uuid);
-        if (!userUpdateDTO.getFirstName().isEmpty()) user.setFirstname(userUpdateDTO.getFirstName());
-        if (!userUpdateDTO.getSecondName().isEmpty()) user.setSecondname(userUpdateDTO.getSecondName());
-        if (!userUpdateDTO.getEmail().isEmpty()) user.setEmail(userUpdateDTO.getEmail());
+        return user != null ? UserMapper.convertToShortDto(user) : null;
     }
+
     @Override
-    public void deleteById(long uuid){
-        userRepository.deleteById(uuid);
+    public boolean save(UserDTOToEntity object) {
+        userRepository.save(UserMapper.createUserDto(object));
+        return true;
+    }
+
+    @Override
+    public boolean update(long uuid, UserDTOToEntity userUpdateDTO) {
+        User user = userRepository.findById(uuid);
+        if (user != null) {
+            if (!userUpdateDTO.getFirstName().isEmpty()) {
+                user.setFirstname(userUpdateDTO.getFirstName());
+            }
+            if (!userUpdateDTO.getSecondName().isEmpty()) {
+                user.setSecondname(userUpdateDTO.getSecondName());
+            }
+            if (!userUpdateDTO.getEmail().isEmpty()) {
+                user.setEmail(userUpdateDTO.getEmail());
+            }
+            userRepository.save(user);
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public void deleteById(long uuid) {
+         userRepository.deleteById(uuid);
     }
 }

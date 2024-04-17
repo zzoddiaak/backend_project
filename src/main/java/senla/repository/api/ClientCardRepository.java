@@ -1,7 +1,6 @@
-package senla.repository.iface;
+package senla.repository.api;
 
 
-import senla.entities.Client;
 import senla.entities.ClientCard;
 
 import java.util.List;

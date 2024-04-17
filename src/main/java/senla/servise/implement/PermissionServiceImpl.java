@@ -4,7 +4,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import senla.dto.permission.PermissionDTO;
 import senla.dto.permission.PermissionDTOToEntity;
-
 import senla.entities.Permission;
 import senla.enums.PermissionType;
 import senla.mapper.PermissionMapper;
@@ -27,21 +26,28 @@ public class PermissionServiceImpl implements PermissionService {
 
     @Override
     public PermissionDTO findById(long uuid) {
-        return PermissionMapper.convertToDto(permissionRepository.findById(uuid));
-    }
-
-    @Override
-    public void save(PermissionDTOToEntity object) {
-        permissionRepository.save(PermissionMapper.createPermissionDto(object));
-    }
-
-    @Override
-    public void update(long uuid, PermissionDTOToEntity updateDTO) {
         Permission permission = permissionRepository.findById(uuid);
-        if (updateDTO.getPermissionType() != null) {
-            permission.setPermissionType(PermissionType.valueOf(String.valueOf(updateDTO.getPermissionType())));
-        }
+        return permission != null ? PermissionMapper.convertToDto(permission) : null;
+    }
+
+    @Override
+    public boolean save(PermissionDTOToEntity object) {
+        Permission permission = PermissionMapper.createPermissionDto(object);
         permissionRepository.save(permission);
+        return permission.getId() != null;
+    }
+
+    @Override
+    public boolean update(long uuid, PermissionDTOToEntity updateDTO) {
+        Permission permission = permissionRepository.findById(uuid);
+        if (permission != null) {
+            if (updateDTO.getPermissionType() != null) {
+                permission.setPermissionType(PermissionType.valueOf(String.valueOf(updateDTO.getPermissionType())));
+            }
+            permissionRepository.save(permission);
+            return true;
+        }
+        return false;
     }
 
     @Override
@@ -49,3 +55,4 @@ public class PermissionServiceImpl implements PermissionService {
         permissionRepository.deleteById(uuid);
     }
 }
+

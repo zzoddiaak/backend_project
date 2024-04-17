@@ -8,8 +8,9 @@ import java.util.List;
 public interface OrderService {
     List<OrderShortDTO> findAll();
     OrderShortDTO findById(long uuid);
-    void save(OrderDTOToEntity object);
-    void update(long uuid, OrderDTOToEntity updateDTO);
-
+    boolean save(OrderDTOToEntity object);
+    boolean update(long uuid, OrderDTOToEntity updateDTO);
     void deleteById(long uuid);
+
 }
+

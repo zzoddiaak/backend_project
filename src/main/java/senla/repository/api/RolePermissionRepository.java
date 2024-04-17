@@ -1,4 +1,4 @@
-package senla.repository.iface;
+package senla.repository.api;
 
 public interface RolePermissionRepository {
 }

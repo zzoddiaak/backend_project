@@ -14,29 +14,46 @@ import java.util.List;
 @RequiredArgsConstructor
 public class SessionRequestServiceImpl implements SessionRequestService {
     private final SessionRequestRepository sessionRequestRepository;
+
     @Override
-    public List<SessionRequestDTO> findAll(){
+    public List<SessionRequestDTO> findAll() {
         return sessionRequestRepository.findAll().stream()
                 .map(SessionRequestMapper::convertToShortDto)
                 .toList();
+    }
 
-    }
     @Override
-    public SessionRequestDTO findById(long uuid){
-        return SessionRequestMapper.convertToShortDto(sessionRequestRepository.findById(uuid));
-    }
-    @Override
-    public void save(SessionRequestDTOToEntity object){
-        sessionRequestRepository.save(SessionRequestMapper.createSessionRequestDto(object));
-    }
-    @Override
-    public void update(long uuid, SessionRequestDTOToEntity updateDTO){
+    public SessionRequestDTO findById(long uuid) {
         SessionRequest sessionRequest = sessionRequestRepository.findById(uuid);
-        if (updateDTO.getRequestDate() != null) sessionRequest.setRequestDate(updateDTO.getRequestDate());
-        if (!updateDTO.getProblem().isEmpty()) sessionRequest.setProblem(updateDTO.getProblem());
+        return sessionRequest != null ? SessionRequestMapper.convertToShortDto(sessionRequest) : null;
     }
+
+    @Override
+    public boolean save(SessionRequestDTOToEntity object) {
+        SessionRequest sessionRequest = SessionRequestMapper.createSessionRequestDto(object);
+        sessionRequestRepository.save(sessionRequest);
+        return true;
+    }
+
+    @Override
+    public boolean update(long uuid, SessionRequestDTOToEntity updateDTO) {
+        SessionRequest sessionRequest = sessionRequestRepository.findById(uuid);
+        if (sessionRequest != null) {
+            if (updateDTO.getRequestDate() != null) {
+                sessionRequest.setRequestDate(updateDTO.getRequestDate());
+            }
+            if (!updateDTO.getProblem().isEmpty()) {
+                sessionRequest.setProblem(updateDTO.getProblem());
+            }
+            sessionRequestRepository.save(sessionRequest);
+            return true;
+        }
+        return false;
+    }
+
     @Override
     public void deleteById(long uuid){
         sessionRequestRepository.deleteById(uuid);
     }
 }
+

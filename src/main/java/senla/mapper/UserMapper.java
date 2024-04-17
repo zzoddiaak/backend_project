@@ -10,7 +10,7 @@ public class UserMapper {
         return source == null ? null : UserFullInfoDTO.builder()
                 .email(source.getEmail())
                 .secondName(source.getSecondname())
-                .user_password(source.getUser_password())
+                .user_password(source.getUserPassword())
                 .firstName(source.getFirstname())
                 .role(RoleMapper.convertToDto( source.getRole()))
                 .build();

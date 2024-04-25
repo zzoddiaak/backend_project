@@ -1,16 +1,16 @@
 -- Вставки для таблицы roles
-INSERT INTO public.roles (id, role_name) VALUES
-(1, 'ADMIN'),
-(2, 'CLIENT'),
-(3, 'PSYCHOLOGIST');
+INSERT INTO public.roles ( role_name) VALUES
+( 'ADMIN'),
+( 'CLIENT'),
+( 'PSYCHOLOGIST');
 
 -- Вставки для таблицы users
-INSERT INTO public.users (id, firstname, secondname, user_password, email, role_id) VALUES
-(1, 'John', 'Doe', 'password123', 'john@example.com', 1),
-(2, 'Jane', 'Smith', 'abc123', 'jane@example.com', 2),
-(3, 'Alice', 'Johnson', 'passw0rd', 'alice@example.com', 2),
-(4, 'Bob', 'Brown', 'test123', 'bob@example.com', 3),
-(5, 'Eva', 'Williams', 'qwerty', 'eva@example.com', 3);
+INSERT INTO public.users ( firstname, secondname, user_password, email, role_id) VALUES
+( 'John', 'Doe', 'password123', 'john@example.com', 1),
+( 'Jane', 'Smith', 'abc123', 'jane@example.com', 2),
+( 'Alice', 'Johnson', 'passw0rd', 'alice@example.com', 2),
+( 'Bob', 'Brown', 'test123', 'bob@example.com', 3),
+( 'Eva', 'Williams', 'qwerty', 'eva@example.com', 3);
 
 -- Вставки для таблицы psychologists
 INSERT INTO public.psychologists (id, user_id, experience, hourly_rate, rating_value) VALUES
@@ -30,20 +30,20 @@ INSERT INTO public.clients (id, user_id, client_card_id) VALUES
 (2, 2, 1002),
 (3, 3, 1003);
 
-INSERT INTO public.orders (id, total_price, discounts) VALUES
-(1, 2.22, 100.78),
-(2, 3.77, 100.98),
-(3, 2.98, 100.56),
-(4, 3.45, 100.34),
-(5, 3.34, 100.67);
+INSERT INTO public.orders (total_price, discounts) VALUES
+( 2.22, 100.78),
+( 3.77, 100.98),
+( 2.98, 100.56),
+( 3.45, 100.34),
+( 3.34, 100.67);
 
 -- Вставки для таблицы courses
-INSERT INTO public.courses (id, course_name, course_price, order_id) VALUES
-(1, 'course1', 100.78, 1),
-(2, 'course2', 100.98, 2),
-(3, 'course3', 100.56, 3),
-(4, 'course4', 100.34, 4),
-(5, 'course5', 100.67, 5);
+INSERT INTO public.courses ( course_name, course_price, order_id) VALUES
+( 'course1', 100.78, 1),
+( 'course2', 100.98, 2),
+( 'course3', 100.56, 3),
+( 'course4', 100.34, 4),
+( 'course5', 100.67, 5);
 
 INSERT INTO public.sessions (psychologist_id, client_id, start_session, final_session, course_id, order_id) VALUES
 (4, 2, '2024-04-10 10:00:00+00', '2024-04-10 12:00:00+00', 1, 1),

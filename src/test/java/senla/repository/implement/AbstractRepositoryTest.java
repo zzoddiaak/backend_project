@@ -33,6 +33,8 @@ public class AbstractRepositoryTest {
         User user = User.builder()
                 .firstname("TEST")
                 .secondname("ACCOUNT")
+                .userPassword("df")
+                .email("dsds")
                 .build();
 
         userRepository.save(user);

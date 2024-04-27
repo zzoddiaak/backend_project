@@ -10,6 +10,5 @@ public interface UserRepository {
     void deleteById(Long uuid);
     public List<User> findAllWithFetch(String secondname);
     public List<User> findAllWithJoinFetch(String email);
-
     public List<User> findAllWithDetails();
 }

@@ -6,8 +6,8 @@ import lombok.SneakyThrows;
 import org.springframework.web.bind.annotation.*;
 import senla.dto.order.OrderDTOToEntity;
 import senla.servise.OrderService;
-
 @RestController
+@RequestMapping("/api/v1/orders")
 @RequiredArgsConstructor
 public class OrderController {
     private final OrderService orderService;
@@ -18,9 +18,9 @@ public class OrderController {
         return serialize(orderService.findAll());
     }
 
-    @GetMapping("/{uuid}")
-    public String findById(@PathVariable Long uuid) {
-        return serialize(orderService.findById(uuid));
+    @GetMapping("/{id}")
+    public String findById(@PathVariable Long id) {
+        return serialize(orderService.findById(id));
     }
 
     @PostMapping

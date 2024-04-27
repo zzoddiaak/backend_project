@@ -10,6 +10,7 @@ import java.io.IOException;
 
 @RestController
 @RequiredArgsConstructor
+@RequestMapping("/api/v1/payments-statuses")
 public class PaymentStatusController {
     private final PaymentStatusService paymentStatusService;
     private final ObjectMapper objectMapper;
@@ -19,9 +20,9 @@ public class PaymentStatusController {
         return serialize(paymentStatusService.findAll());
     }
 
-    @GetMapping("/{uuid}")
-    public String findById(@PathVariable Long uuid) {
-        return serialize(paymentStatusService.findById(uuid));
+    @GetMapping("/{id}")
+    public String findById(@PathVariable Long id) {
+        return serialize(paymentStatusService.findById(id));
     }
 
     @PostMapping

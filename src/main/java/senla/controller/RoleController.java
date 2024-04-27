@@ -10,6 +10,7 @@ import java.io.IOException;
 
 @RestController
 @RequiredArgsConstructor
+@RequestMapping("/api/v1/roles")
 public class RoleController {
     private final RoleService roleService;
     private final ObjectMapper objectMapper;
@@ -19,9 +20,9 @@ public class RoleController {
         return serialize(roleService.findAll());
     }
 
-    @GetMapping("/{uuid}")
-    public String findById(@PathVariable Long uuid) {
-        return serialize(roleService.findById(uuid));
+    @GetMapping("/{id}")
+    public String findById(@PathVariable Long id) {
+        return serialize(roleService.findById(id));
     }
 
     @PostMapping

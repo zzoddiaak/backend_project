@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.*;
 import senla.dto.user.UserDTOToEntity;
 import senla.entities.User;
 import senla.repository.api.UserRepository;
+import senla.servise.SessionRequestService;
+import senla.servise.UserService;
 
 import java.io.IOException;
 import java.util.List;
@@ -15,44 +17,45 @@ import static senla.entities.User_.secondname;
 
 @RestController
 @RequiredArgsConstructor
+@RequestMapping("/api/v1/users")
 public class UserController {
-    private final UserRepository userRepository;
+    private final UserService userService;
     private final ObjectMapper objectMapper;
 
     @GetMapping
     public String findAll() {
-        List<User> users = userRepository.findAll();
-        return serialize(users);
+        return serialize(userService.findAll());
     }
 
-    @GetMapping("/findAllWithDetails")
+
+  /*  @GetMapping("/findAllWithDetails")
     public String findAllWithDetails() {
-        List<User> users = userRepository.findAllWithDetails();
+        List<User> users = userService.findAllWithDetails();
         return serialize(users);
     }
 
     @GetMapping("/findAllWithFetch")
     public String findAllWithFetch() {
-        List<User> users = userRepository.findAllWithFetch(secondname.getName());
+        List<User> users = userService.findAllWithFetch(secondname.getName());
         return serialize(users);
     }
 
     @GetMapping("/findAllWithJoinFetch")
     public String findAllWithJoinFetch() {
-        List<User> users = userRepository.findAllWithJoinFetch(email.getName());
+        List<User> users = userService.findAllWithJoinFetch(email.getName());
         return serialize(users);
-    }
+    }*/
 
     @GetMapping("/{uuid}")
-    public String findById(@PathVariable Long uuid) {
-        User user = userRepository.findById(uuid);
-        return serialize(user);
+    public String findById(@PathVariable Long id) {
+        return serialize(userService.findById(id));
     }
 
-    /*@PostMapping
-    public void save(@RequestBody String userDTO) {
+
+    @PostMapping
+    public void save(@RequestBody String userShortInfoDTO) {
         try {
-            userRepository.save(deserialize(userDTO));
+            userService.save(deserialize(userShortInfoDTO));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -61,15 +64,15 @@ public class UserController {
     @PutMapping("/{id}")
     public void update(@PathVariable long id, @RequestBody String updateDTO) {
         try {
-            userRepository.update(id, deserialize(updateDTO));
+            userService.update(id, deserialize(updateDTO));
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }*/
+    }
 
     @DeleteMapping("/{id}")
     public void deleteById(@PathVariable Long id) {
-        userRepository.deleteById(id);
+        userService.deleteById(id);
     }
 
     private String serialize(Object object) {

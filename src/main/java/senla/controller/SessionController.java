@@ -10,6 +10,7 @@ import java.io.IOException;
 
 @RestController
 @RequiredArgsConstructor
+@RequestMapping("/api/v1/sessions")
 public class SessionController {
     private final SessionService sessionService;
     private final ObjectMapper objectMapper;
@@ -19,9 +20,9 @@ public class SessionController {
         return serialize(sessionService.findAll());
     }
 
-    @GetMapping("/{uuid}")
-    public String findById(@PathVariable Long uuid) {
-        return serialize(sessionService.findById(uuid));
+    @GetMapping("/{id}")
+    public String findById(@PathVariable Long id) {
+        return serialize(sessionService.findById(id));
     }
 
     @PostMapping

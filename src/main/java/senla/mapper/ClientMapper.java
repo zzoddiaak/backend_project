@@ -6,7 +6,7 @@ import senla.dto.client.ClientFullInfoDTO;
 import senla.dto.client.ClientShortInfoDTO;
 import senla.entities.Client;
 
-@UtilityClass
+
 
 public class ClientMapper {
     public static ClientFullInfoDTO convertToFullDto(Client source){

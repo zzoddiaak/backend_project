@@ -9,6 +9,7 @@ import senla.servise.PaymentService;
 
 @RestController
 @RequiredArgsConstructor
+@RequestMapping("/api/v1/payments")
 public class PaymentController {
     private final PaymentService paymentService;
     private final ObjectMapper objectMapper;
@@ -18,9 +19,9 @@ public class PaymentController {
         return serialize(paymentService.findAll());
     }
 
-    @GetMapping("/{uuid}")
-    public String findById(@PathVariable Long uuid) {
-        return serialize(paymentService.findById(uuid));
+    @GetMapping("/{id}")
+    public String findById(@PathVariable Long id) {
+        return serialize(paymentService.findById(id));
     }
 
     @PostMapping

@@ -2,12 +2,13 @@ package senla.servise.implement;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import senla.mapper.RoleMapper;
 import senla.dto.role.RoleDTO;
 import senla.dto.role.RoleDTOToEntity;
 import senla.entities.Role;
 import senla.enums.RoleName;
-import senla.repository.iface.RoleRepository;
+import senla.repository.api.RoleRepository;
 import senla.servise.RoleService;
 
 import java.util.List;
@@ -16,20 +17,20 @@ import java.util.List;
 @RequiredArgsConstructor
 public class RoleServiceImpl implements RoleService {
     private final RoleRepository roleRepository;
-
+    @Transactional
     @Override
     public List<RoleDTO> findAll() {
         return roleRepository.findAll().stream()
                 .map(RoleMapper::convertToDto)
                 .toList();
     }
-
+    @Transactional
     @Override
     public RoleDTO findById(long uuid) {
         Role role = roleRepository.findById(uuid);
         return role != null ? RoleMapper.convertToDto(role) : null;
     }
-
+    @Transactional
     @Override
     public boolean save(RoleDTOToEntity object) {
         RoleName roleName = object.getRoleName();
@@ -40,7 +41,7 @@ public class RoleServiceImpl implements RoleService {
         }
         return false;
     }
-
+    @Transactional
     @Override
     public boolean update(long uuid, RoleDTOToEntity updateDTO) {
         Role role = roleRepository.findById(uuid);
@@ -54,7 +55,7 @@ public class RoleServiceImpl implements RoleService {
         }
         return false;
     }
-
+    @Transactional
     @Override
     public void deleteById(long uuid) {
         roleRepository.deleteById(uuid);

@@ -2,11 +2,12 @@ package senla.servise.implement;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import senla.mapper.UserMapper;
 import senla.dto.user.UserDTOToEntity;
 import senla.dto.user.UserShortInfoDTO;
 import senla.entities.User;
-import senla.repository.iface.UserRepository;
+import senla.repository.api.UserRepository;
 import senla.servise.UserService;
 
 import java.util.List;
@@ -15,26 +16,26 @@ import java.util.List;
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
-
+    @Transactional
     @Override
     public List<UserShortInfoDTO> findAll() {
         return userRepository.findAll().stream()
                 .map(UserMapper::convertToShortDto)
                 .toList();
     }
-
+    @Transactional
     @Override
     public UserShortInfoDTO findById(long uuid) {
         User user = userRepository.findById(uuid);
         return user != null ? UserMapper.convertToShortDto(user) : null;
     }
-
+    @Transactional
     @Override
     public boolean save(UserDTOToEntity object) {
         userRepository.save(UserMapper.createUserDto(object));
         return true;
     }
-
+    @Transactional
     @Override
     public boolean update(long uuid, UserDTOToEntity userUpdateDTO) {
         User user = userRepository.findById(uuid);
@@ -53,7 +54,7 @@ public class UserServiceImpl implements UserService {
         }
         return false;
     }
-
+    @Transactional
     @Override
     public void deleteById(long uuid) {
          userRepository.deleteById(uuid);

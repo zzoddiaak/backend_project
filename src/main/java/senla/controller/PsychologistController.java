@@ -10,6 +10,7 @@ import java.io.IOException;
 
 @RestController
 @RequiredArgsConstructor
+@RequestMapping("/api/v1/psychologists")
 public class PsychologistController {
     private final PsychologistService psychologistService;
     private final ObjectMapper objectMapper;
@@ -19,9 +20,9 @@ public class PsychologistController {
         return serialize(psychologistService.findAll());
     }
 
-    @GetMapping("/{uuid}")
-    public String findById(@PathVariable Long uuid) {
-        return serialize(psychologistService.findById(uuid));
+    @GetMapping("/{id}")
+    public String findById(@PathVariable Long id) {
+        return serialize(psychologistService.findById(id));
     }
 
     @PostMapping

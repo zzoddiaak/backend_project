@@ -1,6 +1,8 @@
 package senla.dto.session;
 
 import java.time.LocalDateTime;
+import java.util.List;
+
 import lombok.*;
 import senla.dto.client.ClientFullInfoDTO;
 import senla.dto.course.CourseFullInfoDTO;

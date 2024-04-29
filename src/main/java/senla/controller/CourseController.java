@@ -6,7 +6,7 @@ import lombok.SneakyThrows;
 import org.springframework.web.bind.annotation.*;
 import senla.dto.course.CourseDTOToEntity;
 import senla.servise.CourseService;
-
+@RequestMapping("/api/v1/courses")
 @RestController
 @RequiredArgsConstructor
 public class CourseController {
@@ -18,9 +18,9 @@ public class CourseController {
         return serialize(courseService.findAll());
     }
 
-    @GetMapping("/{uuid}")
-    public String findById(@PathVariable Long uuid) {
-        return serialize(courseService.findById(uuid));
+    @GetMapping("/{id}")
+    public String findById(@PathVariable Long id) {
+        return serialize(courseService.findById(id));
     }
 
     @PostMapping

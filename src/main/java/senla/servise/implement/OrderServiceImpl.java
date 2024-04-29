@@ -2,13 +2,13 @@ package senla.servise.implement;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import senla.mapper.OrderMapper;
 import senla.dto.order.OrderDTOToEntity;
 import senla.dto.order.OrderShortDTO;
 import senla.entities.Order;
-import senla.repository.iface.OrderRepository;
+import senla.repository.api.OrderRepository;
 import senla.servise.OrderService;
-import senla.transarction.Transaction;
 
 import java.util.List;
 
@@ -16,27 +16,27 @@ import java.util.List;
 @RequiredArgsConstructor
 public class OrderServiceImpl implements OrderService {
     private final OrderRepository orderRepository;
-    @Transaction
+    @Transactional
     @Override
     public List<OrderShortDTO> findAll() {
         return orderRepository.findAll().stream()
                 .map(OrderMapper::convertToShortDto)
                 .toList();
     }
-    @Transaction
+    @Transactional
     @Override
     public OrderShortDTO findById(long uuid) {
         Order order = orderRepository.findById(uuid);
         return order != null ? OrderMapper.convertToShortDto(order) : null;
     }
-    @Transaction
+    @Transactional
     @Override
     public boolean save(OrderDTOToEntity object) {
         Order order = OrderMapper.createOrderDto(object);
         orderRepository.save(order);
         return order.getId() != null;
     }
-    @Transaction
+    @Transactional
     @Override
     public boolean update(long uuid, OrderDTOToEntity updateDTO) {
         Order order = orderRepository.findById(uuid);
@@ -48,7 +48,7 @@ public class OrderServiceImpl implements OrderService {
         }
         return false;
     }
-    @Transaction
+    @Transactional
     @Override
     public void deleteById(long uuid){
         orderRepository.deleteById(uuid);

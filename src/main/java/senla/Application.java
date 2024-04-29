@@ -10,21 +10,21 @@ public class Application {
         ApplicationContext context =new AnnotationConfigApplicationContext("senla");
 
 
-       
-    Runnable sessionTask = () -> {
-        SessionController sessionController = context.getBean(SessionController.class);
-        sessionController.deleteById(1L);
-        sessionController.update(2, """
+
+        Runnable sessionTask = () -> {
+            SessionController sessionController = context.getBean(SessionController.class);
+            sessionController.deleteById(1L);
+            sessionController.update(2, """
                 {
                       "startSession" : "2024-04-17T08:35:00",
                       "finalSession" : "2024-05-12T09:30:00"
                 }
                 """);
-        System.out.println("Session: \n" + sessionController.findAll());
+            System.out.println("Session: \n" + sessionController.findAll());
 
         };
         sessionTask.run();
-       
+
 
     }
 }

@@ -1,6 +1,6 @@
 package senla.repository.api;
 
-import senla.entities.Client;
+import senla.entities.*;
 
 import java.util.List;
 
@@ -9,4 +9,5 @@ public interface ClientRepository {
     List<Client> findAll();
     void save(Client client);
     void deleteById(Long uuid);
+    public List<Client> findAllWithDetails();
 }

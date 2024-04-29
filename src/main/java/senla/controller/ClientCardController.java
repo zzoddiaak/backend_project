@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import senla.dto.clientcard.ClientCardDTOToEntity;
 import senla.servise.ClientCardService;
 
+@RequestMapping("/api/v1/clients-cards")
 @RestController
 @RequiredArgsConstructor
 public class ClientCardController {
@@ -18,9 +19,9 @@ public class ClientCardController {
         return serialize(clientCardService.findAll());
     }
 
-    @GetMapping("/{uuid}")
-    public String findById(@PathVariable Long uuid) {
-        return serialize(clientCardService.findById(uuid));
+    @GetMapping("/{id}")
+    public String findById(@PathVariable Long id) {
+        return serialize(clientCardService.findById(id));
     }
 
     @PostMapping

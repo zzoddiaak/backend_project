@@ -9,4 +9,7 @@ public interface ReviewRepository {
     List<Review> findAll();
     void save(Review review);
     void deleteById(Long uuid);
+    public List<Review> findAllWithFetch(int rating);
+    public List<Review> findAllWithJoinFetch(String commentReviews);
+    public List<Review> findAllWithDetails();
 }

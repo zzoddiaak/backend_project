@@ -18,7 +18,8 @@ public class ClientCard {
     private String diagnos;
     @Column(name = "recommendations")
     private String recommendations;
-    @ManyToOne(fetch=FetchType.LAZY)
+    @ManyToOne(fetch=FetchType.LAZY,
+            cascade = {CascadeType.REMOVE, CascadeType.MERGE})
     @JoinColumn(name = "psychologist_id", referencedColumnName = "id")
     private Psychologist psychologist;
 }

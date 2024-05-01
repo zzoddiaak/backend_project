@@ -12,7 +12,7 @@ import senla.repository.api.PermissionRepository;
 import senla.servise.PermissionService;
 
 import java.util.List;
-
+@Transactional(readOnly = true)
 @Service
 @RequiredArgsConstructor
 public class PermissionServiceImpl implements PermissionService {

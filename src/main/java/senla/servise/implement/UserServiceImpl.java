@@ -11,7 +11,7 @@ import senla.repository.api.UserRepository;
 import senla.servise.UserService;
 
 import java.util.List;
-
+@Transactional(readOnly = true)
 @Service
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
@@ -40,13 +40,13 @@ public class UserServiceImpl implements UserService {
     public boolean update(long uuid, UserDTOToEntity userUpdateDTO) {
         User user = userRepository.findById(uuid);
         if (user != null) {
-            if (!userUpdateDTO.getFirstName().isEmpty()) {
+            if (userUpdateDTO.getFirstName() != null && !userUpdateDTO.getFirstName().isEmpty()) {
                 user.setFirstname(userUpdateDTO.getFirstName());
             }
-            if (!userUpdateDTO.getSecondName().isEmpty()) {
+            if (userUpdateDTO.getSecondName() != null &&!userUpdateDTO.getSecondName().isEmpty()) {
                 user.setSecondname(userUpdateDTO.getSecondName());
             }
-            if (!userUpdateDTO.getEmail().isEmpty()) {
+            if (userUpdateDTO.getEmail() != null && !userUpdateDTO.getEmail().isEmpty()) {
                 user.setEmail(userUpdateDTO.getEmail());
             }
             userRepository.save(user);

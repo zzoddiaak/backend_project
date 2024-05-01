@@ -10,7 +10,7 @@ import senla.entities.SessionRequest;
 import senla.repository.api.SessionRequestRepository;
 import senla.servise.SessionRequestService;
 import java.util.List;
-
+@Transactional(readOnly = true)
 @Service
 @RequiredArgsConstructor
 public class SessionRequestServiceImpl implements SessionRequestService {

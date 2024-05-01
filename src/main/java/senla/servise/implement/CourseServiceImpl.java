@@ -13,6 +13,7 @@ import senla.servise.CourseService;
 import java.util.List;
 
 @Service
+@Transactional(readOnly = true)
 @RequiredArgsConstructor
 public class CourseServiceImpl implements CourseService {
     private final CourseRepository courseRepository;

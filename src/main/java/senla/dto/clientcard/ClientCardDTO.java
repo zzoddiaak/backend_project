@@ -9,6 +9,7 @@ import senla.dto.psychologist.PsychologistShortDTO;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ClientCardDTO {
+    private Long id;
     private PsychologistShortDTO psychologist;
     private String diagnosis;
     private String recommendations;

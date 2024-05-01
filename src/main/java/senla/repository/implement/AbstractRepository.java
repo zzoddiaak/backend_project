@@ -6,6 +6,7 @@ import jakarta.persistence.TypedQuery;
 import org.springframework.stereotype.Repository;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public abstract class AbstractRepository<ID, T> {
@@ -23,10 +24,11 @@ public abstract class AbstractRepository<ID, T> {
         TypedQuery<T> query = entityManager.createQuery("select u from " + entityClass.getName() + " u", entityClass);
         return query.getResultList();
     }
-    public void deleteById(ID id){
+    public void deleteById(ID id) {
         T entity = findById(id);
-        if (entity != null){
+
+        if(entity != null)
             entityManager.remove(entity);
-        }
     }
+
 }

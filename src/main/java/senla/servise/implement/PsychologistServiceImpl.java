@@ -11,7 +11,7 @@ import senla.repository.api.PsychologistRepository;
 import senla.servise.PsychologistService;
 
 import java.util.List;
-
+@Transactional(readOnly = true)
 @Service
 @RequiredArgsConstructor
 public class PsychologistServiceImpl implements PsychologistService {

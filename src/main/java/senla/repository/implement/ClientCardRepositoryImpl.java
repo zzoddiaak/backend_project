@@ -19,16 +19,44 @@ public class ClientCardRepositoryImpl extends AbstractRepository<Long, ClientCar
     public ClientCardRepositoryImpl() {
         super(ClientCard.class);
     }
+
+    @Override
+    public ClientCard findById(Long uuid) {
+        return entityManager.find(ClientCard.class, uuid);
+    }
+
+    @Override
+    public List<ClientCard> findAll() {
+        CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+        CriteriaQuery<ClientCard> cq = cb.createQuery(ClientCard.class);
+        Root<ClientCard> root = cq.from(ClientCard.class);
+        cq.select(root);
+        TypedQuery<ClientCard> query = entityManager.createQuery(cq);
+        return query.getResultList();
+    }
+
+    @Override
+    public void save(ClientCard clientCard) {
+        entityManager.persist(clientCard);
+    }
+
+    @Override
+    public void deleteById(Long uuid) {
+        ClientCard clientCard = findById(uuid);
+        if (clientCard != null) {
+            entityManager.remove(clientCard);
+        }
+    }
+
     @Override
     public List<ClientCard> findAllWithFetch(String recommendations) {
         CriteriaBuilder cb = entityManager.getCriteriaBuilder();
         CriteriaQuery<ClientCard> cq = cb.createQuery(ClientCard.class);
         Root<ClientCard> clientCardRoot = cq.from(ClientCard.class);
-
         cq.where(cb.equal(clientCardRoot.get(ClientCard_.recommendations), recommendations));
-
         return entityManager.createQuery(cq).getResultList();
     }
+
     @Override
     public List<ClientCard> findAllWithJoinFetch(String diagnos) {
         String jpql = "select u from ClientCard u where u.diagnos = :diagnos";
@@ -36,6 +64,7 @@ public class ClientCardRepositoryImpl extends AbstractRepository<Long, ClientCar
                 .setParameter("diagnos", diagnos)
                 .getResultList();
     }
+
     @Override
     public List<ClientCard> findAllWithDetails() {
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
@@ -50,8 +79,4 @@ public class ClientCardRepositoryImpl extends AbstractRepository<Long, ClientCar
 
         return typedQuery.getResultList();
     }
-
-
-
-
 }

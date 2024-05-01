@@ -21,7 +21,7 @@ public class ReviewController {
     }
 
     @GetMapping("/{id}")
-    public String findById(@PathVariable Long id) {
+    public String findById(@PathVariable("id") Long id) {
         return serialize(reviewService.findById(id));
     }
 
@@ -35,7 +35,7 @@ public class ReviewController {
     }
 
     @PutMapping("/{id}")
-    public void update(@PathVariable long id, @RequestBody String updateDTO) {
+    public void update(@PathVariable("id") long id, @RequestBody String updateDTO) {
         try {
             reviewService.update(id, deserializeReviewDTO(updateDTO));
         } catch (IOException e) {
@@ -44,7 +44,7 @@ public class ReviewController {
     }
 
     @DeleteMapping("/{id}")
-    public void deleteById(@PathVariable Long id) {
+    public void deleteById(@PathVariable("id") Long id) {
         reviewService.deleteById(id);
     }
 

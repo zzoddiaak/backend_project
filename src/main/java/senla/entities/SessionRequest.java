@@ -20,10 +20,12 @@ public class SessionRequest {
     private String problem;
     @Column(name = "request_date")
     private LocalDate requestDate;
-    @ManyToOne(fetch=FetchType.LAZY)
+    @ManyToOne(fetch=FetchType.LAZY,
+            cascade = {CascadeType.REMOVE, CascadeType.MERGE})
     @JoinColumn(name = "psychologist_id", referencedColumnName = "id")
     private Psychologist psychologist;
-    @ManyToOne(fetch=FetchType.LAZY)
+    @ManyToOne(fetch=FetchType.LAZY,
+            cascade = {CascadeType.REMOVE, CascadeType.MERGE})
     @JoinColumn(name = "client_id", referencedColumnName = "id")
     private Client client;
     @OneToOne(fetch = FetchType.LAZY)

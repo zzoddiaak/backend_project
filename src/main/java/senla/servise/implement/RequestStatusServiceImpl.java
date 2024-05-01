@@ -12,7 +12,7 @@ import senla.repository.api.RequestStatusRepository;
 import senla.servise.RequestStatusService;
 
 import java.util.List;
-
+@Transactional(readOnly = true)
 @Service
 @RequiredArgsConstructor
 public class RequestStatusServiceImpl implements RequestStatusService {

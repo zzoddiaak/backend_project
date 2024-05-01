@@ -12,7 +12,7 @@ import senla.repository.api.UserRepository;
 import senla.servise.SessionService;
 
 import java.util.List;
-
+@Transactional(readOnly = true)
 @Service
 @RequiredArgsConstructor
 public class SessionServiceImpl implements SessionService {

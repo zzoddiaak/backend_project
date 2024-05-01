@@ -21,7 +21,7 @@ public class PsychologistController {
     }
 
     @GetMapping("/{id}")
-    public String findById(@PathVariable Long id) {
+    public String findById(@PathVariable("id") Long id) {
         return serialize(psychologistService.findById(id));
     }
 
@@ -35,7 +35,7 @@ public class PsychologistController {
     }
 
     @PutMapping("/{id}")
-    public void update(@PathVariable long id, @RequestBody String updateDTO) {
+    public void update(@PathVariable("id") long id, @RequestBody String updateDTO) {
         try {
             psychologistService.update(id, deserialize(updateDTO));
         } catch (IOException e) {
@@ -44,7 +44,7 @@ public class PsychologistController {
     }
 
     @DeleteMapping("/{id}")
-    public void deleteById(@PathVariable Long id) {
+    public void deleteById(@PathVariable("id") Long id) {
         psychologistService.deleteById(id);
     }
 

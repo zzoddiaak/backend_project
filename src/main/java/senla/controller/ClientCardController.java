@@ -20,7 +20,7 @@ public class ClientCardController {
     }
 
     @GetMapping("/{id}")
-    public String findById(@PathVariable Long id) {
+    public String findById(@PathVariable("id") Long id) {
         return serialize(clientCardService.findById(id));
     }
 
@@ -34,7 +34,7 @@ public class ClientCardController {
     }
 
     @PutMapping("/{id}")
-    public void update(@PathVariable long id, @RequestBody String updateDTO) {
+    public void update(@PathVariable("id") long id, @RequestBody String updateDTO) {
         try {
             clientCardService.update(id, deserialize(updateDTO));
         } catch (Exception e) {
@@ -43,7 +43,7 @@ public class ClientCardController {
     }
 
     @DeleteMapping("/{id}")
-    public void deleteById(@PathVariable Long id) {
+    public void deleteById(@PathVariable("id") Long id) {
         clientCardService.deleteById(id);
     }
 

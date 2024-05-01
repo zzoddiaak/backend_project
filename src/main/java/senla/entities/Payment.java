@@ -18,10 +18,12 @@ public class Payment {
     @Column(name = "url")
     private String url;
 
-    @ManyToOne(fetch=FetchType.LAZY)
+    @ManyToOne(fetch=FetchType.LAZY,
+            cascade = {CascadeType.REMOVE, CascadeType.MERGE})
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
-    @ManyToOne(fetch=FetchType.LAZY)
+    @ManyToOne(fetch=FetchType.LAZY,
+            cascade = {CascadeType.REMOVE, CascadeType.MERGE})
     @JoinColumn(name = "session_id", referencedColumnName = "id")
     private Session session;
     @OneToOne(fetch = FetchType.LAZY)

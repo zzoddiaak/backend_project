@@ -12,7 +12,7 @@ import senla.repository.api.RoleRepository;
 import senla.servise.RoleService;
 
 import java.util.List;
-
+@Transactional(readOnly = true)
 @Service
 @RequiredArgsConstructor
 public class RoleServiceImpl implements RoleService {

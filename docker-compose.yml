@@ -2,7 +2,6 @@ version: '3.9'
 
 services:
   app:
-    image: 'strange_benz:latest'
     build:
       context: .
     container_name: app

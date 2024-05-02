@@ -11,7 +11,7 @@ import senla.repository.api.ReviewRepository;
 import senla.servise.ReviewService;
 
 import java.util.List;
-
+@Transactional(readOnly = true)
 @Service
 @RequiredArgsConstructor
 public class ReviewServiceImpl implements ReviewService {

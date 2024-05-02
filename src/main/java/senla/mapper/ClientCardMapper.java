@@ -7,6 +7,7 @@ import senla.entities.ClientCard;
 public class ClientCardMapper {
     public static ClientCardDTO convertToDto(ClientCard source){
         return source == null ? null : ClientCardDTO.builder()
+                .id(source.getId())
                 .psychologist(PsychologistMapper.convertToShortDto(source.getPsychologist()))
                 .diagnosis(source.getDiagnos())
                 .recommendations(source.getRecommendations())

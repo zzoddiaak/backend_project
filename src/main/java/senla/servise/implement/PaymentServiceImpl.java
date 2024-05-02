@@ -10,7 +10,7 @@ import senla.entities.Payment;
 import senla.repository.api.PaymentRepository;
 import senla.servise.PaymentService;
 import java.util.List;
-
+@Transactional(readOnly = true)
 @Service
 @RequiredArgsConstructor
 public class PaymentServiceImpl implements PaymentService {

@@ -19,7 +19,7 @@ public class CourseController {
     }
 
     @GetMapping("/{id}")
-    public String findById(@PathVariable Long id) {
+    public String findById(@PathVariable("id") Long id) {
         return serialize(courseService.findById(id));
     }
 
@@ -33,7 +33,7 @@ public class CourseController {
     }
 
     @PutMapping("/{id}")
-    public void update(@PathVariable long id, @RequestBody String updateDTO) {
+    public void update(@PathVariable("id") long id, @RequestBody String updateDTO) {
         try {
             courseService.update(id, deserialize(updateDTO));
         } catch (Exception e) {
@@ -42,7 +42,7 @@ public class CourseController {
     }
 
     @DeleteMapping("/{id}")
-    public void deleteById(@PathVariable Long id) {
+    public void deleteById(@PathVariable("id") Long id) {
         courseService.deleteById(id);
     }
 

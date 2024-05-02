@@ -21,7 +21,8 @@ public class Role {
     @Column(name = "role_name")
     @Enumerated(EnumType.STRING)
     private RoleName roleName;
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.LAZY,
+            cascade = CascadeType.MERGE)
     private List<Permission> permission;
 }
 

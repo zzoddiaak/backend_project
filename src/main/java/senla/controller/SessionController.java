@@ -21,7 +21,7 @@ public class SessionController {
     }
 
     @GetMapping("/{id}")
-    public String findById(@PathVariable Long id) {
+    public String findById(@PathVariable("id") Long id) {
         return serialize(sessionService.findById(id));
     }
 
@@ -35,7 +35,7 @@ public class SessionController {
     }
 
     @PutMapping("/{id}")
-    public void update(@PathVariable long id, @RequestBody String updateDTO) {
+    public void update(@PathVariable("id") long id, @RequestBody String updateDTO) {
         try {
             sessionService.update(id, deserialize(updateDTO));
         } catch (IOException e) {
@@ -44,7 +44,7 @@ public class SessionController {
     }
 
     @DeleteMapping("/{id}")
-    public void deleteById(@PathVariable Long id) {
+    public void deleteById(@PathVariable("id") Long id) {
         sessionService.deleteById(id);
     }
 

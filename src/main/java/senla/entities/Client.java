@@ -2,6 +2,8 @@ package senla.entities;
 import lombok.*;
 import jakarta.persistence.*;
 
+import java.util.List;
+
 
 @Entity
 @Setter
@@ -21,4 +23,15 @@ public class Client {
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "client_card_id", referencedColumnName = "id")
     private ClientCard clientCard;
+
+    @OneToMany(fetch=FetchType.LAZY,
+            cascade = {CascadeType.REMOVE, CascadeType.MERGE},
+            mappedBy = "client"
+    )
+    private List<Session> sessions;
+    @OneToMany(fetch=FetchType.LAZY,
+            cascade = {CascadeType.REMOVE, CascadeType.MERGE},
+            mappedBy = "client"
+    )
+    private List<SessionRequest> sessionRequests;
 }

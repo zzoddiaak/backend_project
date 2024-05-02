@@ -11,7 +11,7 @@ import senla.repository.api.OrderRepository;
 import senla.servise.OrderService;
 
 import java.util.List;
-
+@Transactional(readOnly = true)
 @Service
 @RequiredArgsConstructor
 public class OrderServiceImpl implements OrderService {

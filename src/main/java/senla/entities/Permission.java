@@ -21,6 +21,7 @@ public class Permission  {
     @Column(name = "permission_name")
     private PermissionType permissionType;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.LAZY,
+            cascade = CascadeType.MERGE)
     private List<Role> role;
 }

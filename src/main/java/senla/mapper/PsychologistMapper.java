@@ -22,13 +22,20 @@ public class PsychologistMapper
                 .experience(source.getExperience())
                 .build();
     }
-    public static Psychologist createPsychologistDto(PsychologistDTOToEntity source){
-        return source == null ? null : Psychologist.builder()
+    public static Psychologist createPsychologistDto(PsychologistDTOToEntity source) {
+        if (source == null) {
+            return null;
+        }
+
+        Integer ratingValue = source.getRatingValue();
+        int rating = ratingValue != null ? ratingValue.intValue() : 0;
+
+        return Psychologist.builder()
                 .user(UserMapper.createUserDto(source.getUser()))
                 .hourlyRate(source.getHourlyRate())
-                .ratingValue(source.getRatingValue())
+                .ratingValue(rating)
                 .experience(source.getExperience())
                 .build();
-
     }
+
 }

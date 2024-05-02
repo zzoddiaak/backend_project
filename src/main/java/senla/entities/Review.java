@@ -18,7 +18,9 @@ public class Review {
     private Integer rating;
     @Column(name = "comment_reviews")
     private String commentReviews;
-    @ManyToOne(fetch=FetchType.LAZY)
+
+    @ManyToOne(fetch=FetchType.LAZY,
+            cascade = {CascadeType.REMOVE, CascadeType.MERGE})
     @JoinColumn(name = "session_id", referencedColumnName = "id")
     private Session session;
 

@@ -77,7 +77,7 @@
     </changeSet>
     
     <changeSet id="homework-2-sessions_index" author="postgres">
-        <sqlFile encoding="utf8" path="./sql/16.сreate-sessions_indx-index.sql" relativeToChangelogFile="true"/>
+        <sqlFile encoding="utf8" path="./sql/16.create-sessions_indx-index.sql" relativeToChangelogFile="true"/>
     </changeSet>
     
     <changeSet id="homework-2-reviews_index" author="postgres">

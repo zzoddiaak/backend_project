@@ -11,7 +11,7 @@ import senla.repository.api.ClientCardRepository;
 import senla.servise.ClientCardService;
 
 import java.util.List;
-
+@Transactional(readOnly = true)
 @Service
 @RequiredArgsConstructor
 public class ClientCardServiceImpl implements ClientCardService {
@@ -25,8 +25,8 @@ public class ClientCardServiceImpl implements ClientCardService {
     }
     @Transactional
     @Override
-    public ClientCardDTO findById(long uuid) {
-        ClientCard clientCard = clientCardRepository.findById(uuid);
+    public ClientCardDTO findById(long id) {
+        ClientCard clientCard = clientCardRepository.findById(id);
         return clientCard != null ? ClientCardMapper.convertToDto(clientCard) : null;
     }
     @Transactional
@@ -41,13 +41,16 @@ public class ClientCardServiceImpl implements ClientCardService {
     public boolean update(long uuid, ClientCardDTOToEntity updateDTO) {
         ClientCard clientCard = clientCardRepository.findById(uuid);
         if (clientCard != null) {
-            if (!updateDTO.getDiagnosis().isEmpty()) clientCard.setDiagnos(updateDTO.getDiagnosis());
-            if (!updateDTO.getRecommendations().isEmpty()) clientCard.setRecommendations(updateDTO.getRecommendations());
+            if (updateDTO.getDiagnosis() != null && !updateDTO.getDiagnosis().isEmpty())
+                clientCard.setDiagnos(updateDTO.getDiagnosis());
+            if (updateDTO.getRecommendations() != null && !updateDTO.getRecommendations().isEmpty())
+                clientCard.setRecommendations(updateDTO.getRecommendations());
             clientCardRepository.save(clientCard);
             return true;
         }
         return false;
     }
+
     @Transactional
     @Override
     public void deleteById(long uuid){

@@ -12,7 +12,7 @@ import senla.repository.api.PaymentStatusRepository;
 import senla.servise.PaymentStatusService;
 
 import java.util.List;
-
+@Transactional(readOnly = true)
 @Service
 @RequiredArgsConstructor
 public class PaymentStatusServiceImpl implements PaymentStatusService {

@@ -21,7 +21,7 @@ public class PermissionController {
     }
 
     @GetMapping("/{id}")
-    public String findById(@PathVariable Long id) {
+    public String findById(@PathVariable("id") Long id) {
         return serialize(permissionService.findById(id));
     }
 
@@ -35,7 +35,7 @@ public class PermissionController {
     }
 
     @PutMapping("/{id}")
-    public void update(@PathVariable long id, @RequestBody String updateDTO) {
+    public void update(@PathVariable("id") long id, @RequestBody String updateDTO) {
         try {
             permissionService.update(id, deserialize(updateDTO));
         } catch (IOException e) {
@@ -44,7 +44,7 @@ public class PermissionController {
     }
 
     @DeleteMapping("/{id}")
-    public void deleteById(@PathVariable Long id) {
+    public void deleteById(@PathVariable("id") Long id) {
         permissionService.deleteById(id);
     }
 

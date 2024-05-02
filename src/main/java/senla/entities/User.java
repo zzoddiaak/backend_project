@@ -3,6 +3,9 @@ package senla.entities;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Setter
 @Getter
@@ -22,7 +25,14 @@ public class User {
     private String userPassword;
     @Column(name = "email")
     private String email;
+
     @OneToOne(fetch = FetchType.LAZY)
     private Role role;
+    @OneToMany(fetch=FetchType.LAZY,
+            cascade = {CascadeType.REMOVE, CascadeType.MERGE},
+            mappedBy = "user"
+    )
+    private List<Payment> payments;
+
 
 }

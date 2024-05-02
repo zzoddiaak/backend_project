@@ -11,7 +11,7 @@ import senla.repository.api.ClientRepository;
 import senla.servise.ClientService;
 
 import java.util.List;
-
+@Transactional(readOnly = true)
 @Service
 @RequiredArgsConstructor
 public class ClientServiceImpl implements ClientService {
@@ -29,6 +29,7 @@ public class ClientServiceImpl implements ClientService {
         Client client = clientRepository.findById(uuid);
         return client != null ? ClientMapper.convertToShortDto(client) : null;
     }
+
     @Transactional
     @Override
     public boolean save(ClientDTOToEntity object) {

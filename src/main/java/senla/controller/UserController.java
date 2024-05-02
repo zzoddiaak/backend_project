@@ -46,8 +46,8 @@ public class UserController {
         return serialize(users);
     }*/
 
-    @GetMapping("/{uuid}")
-    public String findById(@PathVariable Long id) {
+    @GetMapping("/{id}")
+    public String findById(@PathVariable("id") Long id) {
         return serialize(userService.findById(id));
     }
 
@@ -62,7 +62,7 @@ public class UserController {
     }
 
     @PutMapping("/{id}")
-    public void update(@PathVariable long id, @RequestBody String updateDTO) {
+    public void update(@PathVariable("id") long id, @RequestBody String updateDTO) {
         try {
             userService.update(id, deserialize(updateDTO));
         } catch (IOException e) {
@@ -71,7 +71,7 @@ public class UserController {
     }
 
     @DeleteMapping("/{id}")
-    public void deleteById(@PathVariable Long id) {
+    public void deleteById(@PathVariable("id") Long id) {
         userService.deleteById(id);
     }
 

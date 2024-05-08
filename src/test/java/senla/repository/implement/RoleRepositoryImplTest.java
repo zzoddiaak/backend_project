@@ -14,9 +14,7 @@ import senla.enums.PermissionType;
 import senla.enums.RoleName;
 import senla.repository.api.PermissionRepository;
 import senla.repository.api.RoleRepository;
-import senla.repository.api.SessionRepository;
 
-import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
 
@@ -63,10 +61,9 @@ public class RoleRepositoryImplTest {
 
         roleRepository.save(role);
 
-        List<Role> roles = roleRepository.findAllWithJoinFetch(role.getRoleName());
+        Role roles = roleRepository.findByRoleName(role.getRoleName());
 
         assertNotNull(roles);
-        assertFalse(roles.isEmpty());
     }
 
 

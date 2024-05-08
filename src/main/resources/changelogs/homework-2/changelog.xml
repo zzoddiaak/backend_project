@@ -39,11 +39,11 @@
      <changeSet id="homework-2-sessions" author="postgres">
         <sqlFile encoding="utf8" path="./sql/03.create-sessions-table.sql" relativeToChangelogFile="true"/>
     </changeSet>
-    
-     
-    
-    
-    
+
+
+
+
+
      
     
      <changeSet id="homework-2-payments_status" author="postgres">

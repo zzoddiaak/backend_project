@@ -6,6 +6,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
@@ -44,18 +45,21 @@ public class OrderControllerTest {
     }
 
     @Test
+    @WithMockUser(username = "user", roles = {"PSYCHOLOGIST"}, password = "user")
     public void findAllTest() throws Exception {
         mockMvc.perform(get("/api/v1/orders"))
                 .andExpect(status().isOk());
     }
 
     @Test
+    @WithMockUser(username = "user", roles = {"ADMIN"}, password = "user")
     public void findByIdTest() throws Exception {
         mockMvc.perform(get("/api/v1/orders/1"))
                 .andExpect(status().isOk());
     }
 
     @Test
+    @WithMockUser(username = "user", roles = {"CLIENT"}, password = "user")
     public void saveTest() throws Exception {
         OrderDTOToEntity dto = OrderDTOToEntity.builder()
                 .discounts(BigDecimal.valueOf(5.6))
@@ -69,6 +73,7 @@ public class OrderControllerTest {
     }
 
     @Test
+    @WithMockUser(username = "user", roles = {"PSYCHOLOGIST"}, password = "user")
     public void updateTest() throws Exception {
         OrderDTOToEntity dto = new OrderDTOToEntity();
         dto.setTotalPrice(BigDecimal.valueOf(5.5));
@@ -80,6 +85,7 @@ public class OrderControllerTest {
     }
 
     @Test
+    @WithMockUser(username = "user", roles = {"ADMIN"}, password = "user")
     public void deleteByIdTest() throws Exception {
         mockMvc.perform(delete("/api/v1/orders/1"))
                 .andExpect(status().isOk());

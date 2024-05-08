@@ -59,4 +59,7 @@ public class UserServiceImpl implements UserService {
     public void deleteById(long uuid) {
          userRepository.deleteById(uuid);
     }
+    public void createNewUser(UserDTOToEntity userDTOToEntity) {
+        User user = UserMapper.createUserDto(userDTOToEntity);
+    }
 }

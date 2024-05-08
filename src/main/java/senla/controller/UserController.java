@@ -28,23 +28,6 @@ public class UserController {
     }
 
 
-  /*  @GetMapping("/findAllWithDetails")
-    public String findAllWithDetails() {
-        List<User> users = userService.findAllWithDetails();
-        return serialize(users);
-    }
-
-    @GetMapping("/findAllWithFetch")
-    public String findAllWithFetch() {
-        List<User> users = userService.findAllWithFetch(secondname.getName());
-        return serialize(users);
-    }
-
-    @GetMapping("/findAllWithJoinFetch")
-    public String findAllWithJoinFetch() {
-        List<User> users = userService.findAllWithJoinFetch(email.getName());
-        return serialize(users);
-    }*/
 
     @GetMapping("/{id}")
     public String findById(@PathVariable("id") Long id) {

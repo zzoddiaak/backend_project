@@ -12,7 +12,7 @@ public interface RoleRepository {
     void save(Role role);
     void deleteById(Long uuid);
     public List<Role> findAllWithFetch(List<Permission> permission);
-    public List<Role> findAllWithJoinFetch(RoleName roleName);
+    public Role findByRoleName(RoleName roleName);
 
     public List<Role> findAllWithDetails();
 }

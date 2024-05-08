@@ -2,8 +2,9 @@ version: '3.9'
 
 services:
   app:
+    image: 'sha256:2e26bff84632899c0253d9d690fb3196a72f7ad20da8b00a3662100d4c2437d6'
     build:
-      context: .
+      context: ./Dockerfile
     container_name: app
     ports:
       - '8080:8080'

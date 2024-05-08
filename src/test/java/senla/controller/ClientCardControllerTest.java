@@ -6,6 +6,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
@@ -38,19 +39,23 @@ public class ClientCardControllerTest {
         this.mockMvc = MockMvcBuilders.webAppContextSetup(wac).build();
     }
 
+
     @Test
+    @WithMockUser(username = "user", roles = {"CLIENT"}, password = "user")
     public void findAllTest() throws Exception {
         mockMvc.perform(get("/api/v1/clients-cards"))
                 .andExpect(status().isOk());
     }
 
     @Test
+    @WithMockUser(username = "user", roles = {"PSYCHOLOGIST"}, password = "user")
     public void findByIdTest() throws Exception {
         mockMvc.perform(get("/api/v1/clients-cards/1"))
                 .andExpect(status().isOk());
     }
 
     @Test
+    @WithMockUser(username = "user", roles = {"ADMIN"}, password = "user")
     public void saveTest() throws Exception {
         ClientCardDTOToEntity dto = ClientCardDTOToEntity.builder()
                 .diagnosis("TEST")
@@ -64,6 +69,7 @@ public class ClientCardControllerTest {
     }
 
     @Test
+    @WithMockUser(username = "user", roles = {"PSYCHOLOGIST"}, password = "user")
     public void updateTest() throws Exception {
         ClientCardDTOToEntity dto = new ClientCardDTOToEntity();
         dto.setDiagnosis("ASDASD");
@@ -73,8 +79,8 @@ public class ClientCardControllerTest {
                         .content(objectMapper.writeValueAsString(dto)))
                 .andExpect(status().isOk());
     }
-
     @Test
+    @WithMockUser(username = "user", roles = {"PSYCHOLOGIST"}, password = "user")
     public void deleteByIdTest() throws Exception {
         mockMvc.perform(delete("/api/v1/clients-cards/1"))
                 .andExpect(status().isOk());

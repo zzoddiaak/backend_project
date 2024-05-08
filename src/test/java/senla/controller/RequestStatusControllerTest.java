@@ -6,6 +6,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
@@ -47,18 +48,21 @@ public class RequestStatusControllerTest {
     }
 
     @Test
+    @WithMockUser(username = "testUser", roles = {"PSYCHOLOGIST"}, password = "sdsdsd")
     public void findAllTest() throws Exception {
         mockMvc.perform(get("/api/v1/requests-statuses"))
                 .andExpect(status().isOk());
     }
 
     @Test
+    @WithMockUser(username = "testUser", roles = {"ADMIN"}, password = "sdsdsd")
     public void findByIdTest() throws Exception {
         mockMvc.perform(get("/api/v1/requests-statuses/1"))
                 .andExpect(status().isOk());
     }
 
     @Test
+    @WithMockUser(username = "testUser", roles = {"CLIENT"}, password = "sdsdsd")
     public void saveTest() throws Exception {
         RequestStatusDTOToEntity dto = RequestStatusDTOToEntity.builder()
                 .requestStatus(StatusRequest.CANCELED)
@@ -71,6 +75,7 @@ public class RequestStatusControllerTest {
     }
 
     @Test
+    @WithMockUser(username = "testUser", roles = {"PSYCHOLOGIST"}, password = "sdsdsd")
     public void updateTest() throws Exception {
         RequestStatusDTOToEntity dto = new RequestStatusDTOToEntity();
         dto.setRequestStatus(StatusRequest.CANCELED);
@@ -82,6 +87,7 @@ public class RequestStatusControllerTest {
     }
 
     @Test
+    @WithMockUser(username = "testUser", roles = {"PSYCHOLOGIST"}, password = "sdsdsd")
     public void deleteByIdTest() throws Exception {
         mockMvc.perform(delete("/api/v1/requests-statuses/1"))
                 .andExpect(status().isOk());

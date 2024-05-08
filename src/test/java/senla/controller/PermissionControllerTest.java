@@ -6,6 +6,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
@@ -45,18 +46,21 @@ public class PermissionControllerTest {
     }
 
     @Test
+    @WithMockUser(username = "testUser", roles = {"CLIENT"}, password = "sdsdsd")
     public void findAllTest() throws Exception {
         mockMvc.perform(get("/api/v1/permissions"))
                 .andExpect(status().isOk());
     }
 
     @Test
+    @WithMockUser(username = "testUser", roles = {"CLIENT"}, password = "sdsdsd")
     public void findByIdTest() throws Exception {
         mockMvc.perform(get("/api/v1/permissions/1"))
                 .andExpect(status().isOk());
     }
 
     @Test
+    @WithMockUser(username = "testUser", roles = {"CLIENT"}, password = "sdsdsd")
     public void saveTest() throws Exception {
         PermissionDTOToEntity dto = PermissionDTOToEntity.builder()
                 .permissionType(PermissionType.DELETE)
@@ -69,6 +73,7 @@ public class PermissionControllerTest {
     }
 
     @Test
+    @WithMockUser(username = "testUser", roles = {"CLIENT"}, password = "sdsdsd")
     public void updateTest() throws Exception {
         PermissionDTOToEntity dto = new PermissionDTOToEntity();
         dto.setPermissionType(PermissionType.DELETE);
@@ -80,6 +85,7 @@ public class PermissionControllerTest {
     }
 
     @Test
+    @WithMockUser(username = "testUser", roles = {"CLIENT"}, password = "sdsdsd")
     public void deleteByIdTest() throws Exception {
         mockMvc.perform(delete("/api/v1/permissions/1"))
                 .andExpect(status().isOk());

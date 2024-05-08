@@ -27,6 +27,7 @@ public class User {
     private String email;
 
     @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "role_id", referencedColumnName = "id")
     private Role role;
     @OneToMany(fetch=FetchType.LAZY,
             cascade = {CascadeType.REMOVE, CascadeType.MERGE},

@@ -6,6 +6,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
@@ -54,12 +55,14 @@ public class ReviewControllerTest {
     }
 
     @Test
+    @WithMockUser(username = "user", roles = {"ADMIN"}, password = "user")
     public void findByIdTest() throws Exception {
         mockMvc.perform(get("/api/v1/reviews/1"))
                 .andExpect(status().isOk());
     }
 
     @Test
+    @WithMockUser(username = "user", roles = {"ADMIN"}, password = "user")
     public void saveTest() throws Exception {
         ReviewDTOToEntity dto = ReviewDTOToEntity.builder()
                 .commentReviews("test")
@@ -73,6 +76,7 @@ public class ReviewControllerTest {
     }
 
     @Test
+    @WithMockUser(username = "user", roles = {"PSYCHOLOGIST"}, password = "user")
     public void updateTest() throws Exception {
         ReviewDTOToEntity dto = new ReviewDTOToEntity();
         dto.setCommentReviews("test");
@@ -85,6 +89,7 @@ public class ReviewControllerTest {
     }
 
     @Test
+    @WithMockUser(username = "user", roles = {"PSYCHOLOGIST"}, password = "user")
     public void deleteByIdTest() throws Exception {
         mockMvc.perform(delete("/api/v1/reviews/1"))
                 .andExpect(status().isOk());

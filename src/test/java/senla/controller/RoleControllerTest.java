@@ -6,6 +6,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.AnnotationConfigWebContextLoader;
@@ -42,18 +43,21 @@ public class RoleControllerTest {
     }
 
     @Test
+    @WithMockUser(username = "user", roles = {"ADMIN"}, password = "user")
     public void findAllTest() throws Exception {
         mockMvc.perform(get("/api/v1/roles"))
                 .andExpect(status().isOk());
     }
 
     @Test
+    @WithMockUser(username = "user", roles = {"ADMIN"}, password = "user")
     public void findByIdTest() throws Exception {
         mockMvc.perform(get("/api/v1/roles/1"))
                 .andExpect(status().isOk());
     }
 
     @Test
+    @WithMockUser(username = "user", roles = {"ADMIN"}, password = "user")
     public void saveTest() throws Exception {
         RoleDTOToEntity dto = RoleDTOToEntity.builder()
                 .roleName(RoleName.ADMIN)
@@ -66,6 +70,7 @@ public class RoleControllerTest {
     }
 
     @Test
+    @WithMockUser(username = "user", roles = {"ADMIN"}, password = "user")
     public void updateTest() throws Exception {
         RoleDTOToEntity dto = new RoleDTOToEntity();
         dto.setRoleName(RoleName.ADMIN);
@@ -78,6 +83,7 @@ public class RoleControllerTest {
     }
 
     @Test
+    @WithMockUser(username = "user", roles = {"ADMIN"}, password = "user")
     public void deleteByIdTest() throws Exception {
         mockMvc.perform(delete("/api/v1/roles/1"))
                 .andExpect(status().isOk());

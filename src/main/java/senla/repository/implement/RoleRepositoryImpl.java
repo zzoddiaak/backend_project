@@ -1,12 +1,15 @@
 package senla.repository.implement;
 
 import jakarta.persistence.EntityGraph;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
 import jakarta.persistence.criteria.*;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import senla.entities.*;
 import senla.enums.RoleName;
+import senla.exception.RoleNotFoundException;
 import senla.repository.api.RoleRepository;
 
 import java.util.ArrayList;
@@ -15,6 +18,8 @@ import java.util.List;
 @Repository
 @Transactional
 public class RoleRepositoryImpl extends AbstractRepository<Long, Role> implements RoleRepository {
+    @PersistenceContext
+    private EntityManager entityManager;
 
     public RoleRepositoryImpl() {
         super(Role.class);
@@ -37,13 +42,23 @@ public class RoleRepositoryImpl extends AbstractRepository<Long, Role> implement
         return entityManager.createQuery(cq).getResultList();
     }
 
-    @Override
-    public List<Role> findAllWithJoinFetch(RoleName roleName) {
-        String jpql = "select u from Role u where u.roleName = :roleName";
-        return entityManager.createQuery(jpql, Role.class)
+    @Transactional
+    public Role findByRoleName(RoleName roleName) {
+        String jpql = "SELECT r FROM Role r LEFT JOIN FETCH r.permission WHERE r.roleName = :roleName";
+
+        List<Role> roles = entityManager.createQuery(jpql, Role.class)
                 .setParameter("roleName", roleName)
                 .getResultList();
+
+        if (roles.isEmpty())
+            throw new RoleNotFoundException(String.valueOf(roleName));
+
+        return roles.get(0);
     }
+
+
+
+
     @Override
     public List<Role> findAllWithDetails() {
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
@@ -58,5 +73,6 @@ public class RoleRepositoryImpl extends AbstractRepository<Long, Role> implement
 
         return typedQuery.getResultList();
     }
+
 
 }

@@ -9,14 +9,11 @@ import org.springframework.test.context.support.AnnotationConfigContextLoader;
 import org.springframework.transaction.annotation.Transactional;
 import senla.config.HibernateConfig;
 import senla.config.LiquibaseConfig;
-import senla.entities.Permission;
 import senla.entities.Role;
-import senla.enums.PermissionType;
 import senla.enums.RoleName;
 import senla.repository.api.PermissionRepository;
 import senla.repository.api.RoleRepository;
 
-import java.util.Collections;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -43,10 +40,9 @@ public class PermissionRepositoryImplTest {
 
         roleRepository.save(role);
 
-        List<Role> roles = roleRepository.findAllWithJoinFetch(role.getRoleName());
+        Role roles = roleRepository.findByRoleName(role.getRoleName());
 
         assertNotNull(roles);
-        assertFalse(roles.isEmpty());
     }
 
 

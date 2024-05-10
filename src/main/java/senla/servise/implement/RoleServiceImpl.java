@@ -1,8 +1,11 @@
 package senla.servise.implement;
 
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import senla.exception.RoleNotFoundException;
 import senla.mapper.RoleMapper;
 import senla.dto.role.RoleDTO;
 import senla.dto.role.RoleDTOToEntity;
@@ -16,6 +19,8 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class RoleServiceImpl implements RoleService {
+    @PersistenceContext
+    private EntityManager entityManager;
     private final RoleRepository roleRepository;
     @Transactional
     @Override
@@ -54,6 +59,19 @@ public class RoleServiceImpl implements RoleService {
             return true;
         }
         return false;
+    }
+    @Transactional
+    public Role findByRoleName(RoleName roleName) {
+        String jpql = "SELECT r FROM Role r LEFT JOIN FETCH r.permission WHERE r.roleName = :roleName";
+
+        List<Role> roles = entityManager.createQuery(jpql, Role.class)
+                .setParameter("roleName", roleName)
+                .getResultList();
+
+        if (roles.isEmpty())
+            throw new RoleNotFoundException(String.valueOf(roleName));
+
+        return roles.get(0);
     }
     @Transactional
     @Override

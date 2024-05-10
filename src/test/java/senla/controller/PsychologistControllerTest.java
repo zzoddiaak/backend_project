@@ -6,6 +6,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
@@ -51,12 +52,15 @@ public class PsychologistControllerTest {
     }
 
     @Test
+    @WithMockUser(username = "testUser", roles = {"CLIENT"}, password = "sdsdsd")
+
     public void findByIdTest() throws Exception {
         mockMvc.perform(get("/api/v1/psychologists/1"))
                 .andExpect(status().isOk());
     }
 
     @Test
+    @WithMockUser(username = "testUser", roles = {"CLIENT"}, password = "sdsdsd")
     public void saveTest() throws Exception {
         PsychologistDTOToEntity dto = PsychologistDTOToEntity.builder()
                 .experience(7)
@@ -69,6 +73,7 @@ public class PsychologistControllerTest {
     }
 
     @Test
+    @WithMockUser(username = "testUser", roles = {"CLIENT"}, password = "sdsdsd")
     public void updateTest() throws Exception {
         PsychologistDTOToEntity dto = new PsychologistDTOToEntity();
         dto.setExperience(6);
@@ -80,6 +85,7 @@ public class PsychologistControllerTest {
     }
 
     @Test
+    @WithMockUser(username = "testUser", roles = {"CLIENT"}, password = "sdsdsd")
     public void deleteByIdTest() throws Exception {
         mockMvc.perform(delete("/api/v1/psychologists/1"))
                 .andExpect(status().isOk());

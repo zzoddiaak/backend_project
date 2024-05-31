@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import senla.dto.permission.PermissionDTOToEntity;
-import senla.servise.PermissionService;
+import senla.service.PermissionService;
 
 import java.io.IOException;
 

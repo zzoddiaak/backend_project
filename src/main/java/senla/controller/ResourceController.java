@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import senla.dto.security.AuthRequest;
 import senla.dto.security.AuthResponse;
-import senla.servise.AuthService;
+import senla.service.AuthService;
 
 @RestController
 @RequestMapping("/api/v1/resource-controller")

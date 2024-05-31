@@ -4,16 +4,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import senla.dto.user.UserDTOToEntity;
-import senla.entities.User;
-import senla.repository.api.UserRepository;
-import senla.servise.SessionRequestService;
-import senla.servise.UserService;
+import senla.service.UserService;
 
 import java.io.IOException;
-import java.util.List;
-
-import static senla.entities.User_.email;
-import static senla.entities.User_.secondname;
 
 @RestController
 @RequiredArgsConstructor

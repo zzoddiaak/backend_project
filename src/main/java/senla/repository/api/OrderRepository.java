@@ -2,6 +2,7 @@ package senla.repository.api;
 
 import senla.entities.Order;
 import senla.entities.PaymentStatus;
+import senla.repository.implement.AbstractRepository;
 
 import java.math.BigDecimal;
 import java.util.List;

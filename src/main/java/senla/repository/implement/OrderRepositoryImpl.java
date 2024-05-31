@@ -17,9 +17,11 @@ import java.util.List;
 @Repository
 @Transactional
 public class OrderRepositoryImpl extends AbstractRepository<Long, Order> implements OrderRepository {
+
     public OrderRepositoryImpl() {
         super(Order.class);
     }
+
     @Override
     public List<Order> findAllWithFetch(BigDecimal totalPrice) {
         CriteriaBuilder cb = entityManager.getCriteriaBuilder();
@@ -30,6 +32,7 @@ public class OrderRepositoryImpl extends AbstractRepository<Long, Order> impleme
 
         return entityManager.createQuery(cq).getResultList();
     }
+
     @Override
     public List<Order> findAllWithJoinFetch(BigDecimal discounts) {
         String jpql = "select u from Order u where u.discounts = :discounts";
@@ -37,11 +40,11 @@ public class OrderRepositoryImpl extends AbstractRepository<Long, Order> impleme
                 .setParameter("discounts", discounts)
                 .getResultList();
     }
+
     @Override
     public List<Order> findAllWithDetails() {
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaQuery<Order> criteriaQuery = criteriaBuilder.createQuery(Order.class);
-        Root<Order> orderRoot = criteriaQuery.from(Order.class);
 
         EntityGraph<Order> entityGraph = entityManager.createEntityGraph(Order.class);
         entityGraph.addSubgraph("psychologist");

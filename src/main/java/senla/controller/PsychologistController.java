@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import senla.dto.psychologist.PsychologistDTOToEntity;
-import senla.servise.PsychologistService;
+import senla.service.PsychologistService;
 
 import java.io.IOException;
 

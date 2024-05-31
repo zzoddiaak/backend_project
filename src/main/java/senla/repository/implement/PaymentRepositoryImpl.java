@@ -13,9 +13,11 @@ import java.util.List;
 
 @Repository
 public class PaymentRepositoryImpl extends AbstractRepository<Long ,Payment> implements PaymentRepository {
+
     public PaymentRepositoryImpl() {
         super(Payment.class);
     }
+
     @Override
     public List<Payment> findAllWithFetch(String url) {
         CriteriaBuilder cb = entityManager.getCriteriaBuilder();
@@ -26,6 +28,7 @@ public class PaymentRepositoryImpl extends AbstractRepository<Long ,Payment> imp
 
         return entityManager.createQuery(cq).getResultList();
     }
+
     @Override
     public List<Payment> findAllWithJoinFetch(User user) {
         String jpql = "select u from Payment u where u.user = :user";
@@ -34,10 +37,10 @@ public class PaymentRepositoryImpl extends AbstractRepository<Long ,Payment> imp
                 .getResultList();
     }
     @Override
+
     public List<Payment> findAllWithDetails() {
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaQuery<Payment> criteriaQuery = criteriaBuilder.createQuery(Payment.class);
-        Root<Payment> paymentRoot = criteriaQuery.from(Payment.class);
         EntityGraph<Payment> entityGraph = entityManager.createEntityGraph(Payment.class);
         entityGraph.addSubgraph("paymentStatus");
         entityGraph.addSubgraph("order");

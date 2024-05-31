@@ -19,7 +19,10 @@ public class RestExceptionNotFoundHandler {
             RoleNotFoundException.class,
             SessionNotFoundException.class,
             SessionRequestNotFoundException.class,
-            UserNotFoundException.class
+            UserNotFoundException.class,
+            UserNotFoundId.class,
+            OrderNotFoundId.class,
+            SessionNotFoundId.class
 
     })
     public ResponseEntity<Object> handleException(Exception e) {

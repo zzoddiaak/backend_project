@@ -2,10 +2,9 @@ package senla.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
-import lombok.SneakyThrows;
 import org.springframework.web.bind.annotation.*;
 import senla.dto.clientcard.ClientCardDTOToEntity;
-import senla.servise.ClientCardService;
+import senla.service.ClientCardService;
 
 @RequestMapping("/api/v1/clients-cards")
 @RestController

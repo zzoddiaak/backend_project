@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import senla.dto.PaymentStatus.PaymentStatusDTOToEntity;
-import senla.servise.PaymentStatusService;
+import senla.service.PaymentStatusService;
 
 import java.io.IOException;
 

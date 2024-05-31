@@ -17,9 +17,11 @@ import java.util.List;
 @Repository
 @Transactional
 public class CourseRepositoryImpl extends AbstractRepository<Long, Course> implements CourseRepository {
+
     public CourseRepositoryImpl() {
         super(Course.class);
     }
+
     @Override
     public List<Course> findAllWithFetch(BigDecimal coursePrice) {
         CriteriaBuilder cb = entityManager.getCriteriaBuilder();
@@ -30,6 +32,7 @@ public class CourseRepositoryImpl extends AbstractRepository<Long, Course> imple
 
         return entityManager.createQuery(cq).getResultList();
     }
+
     @Override
     public List<Course> findAllWithJoinFetch(String courseName) {
         String jpql = "select u from Course u where u.courseName = :courseName";
@@ -37,11 +40,11 @@ public class CourseRepositoryImpl extends AbstractRepository<Long, Course> imple
                 .setParameter("courseName", courseName)
                 .getResultList();
     }
+
     @Override
     public List<Course> findAllWithDetails() {
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaQuery<Course> criteriaQuery = criteriaBuilder.createQuery(Course.class);
-        Root<Course> courseRoot = criteriaQuery.from(Course.class);
 
         EntityGraph<Course> entityGraph = entityManager.createEntityGraph(Course.class);
         entityGraph.addSubgraph("order");

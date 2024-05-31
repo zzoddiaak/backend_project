@@ -30,6 +30,7 @@ public class SessionRequestRepositoryImpl extends AbstractRepository<Long, Sessi
 
         return entityManager.createQuery(cq).getResultList();
     }
+
     @Override
     public List<SessionRequest> findAllWithJoinFetch(LocalDate requestDate) {
         String jpql = "select u from SessionRequest u where u.requestDate = :requestDate";
@@ -42,7 +43,6 @@ public class SessionRequestRepositoryImpl extends AbstractRepository<Long, Sessi
     public List<SessionRequest> findAllWithDetails() {
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaQuery<SessionRequest> criteriaQuery = criteriaBuilder.createQuery(SessionRequest.class);
-        Root<SessionRequest> sessionRequestRoot = criteriaQuery.from(SessionRequest.class);
 
         EntityGraph<SessionRequest> entityGraph = entityManager.createEntityGraph(SessionRequest.class);
         entityGraph.addSubgraph("session");

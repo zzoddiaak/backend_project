@@ -2,10 +2,9 @@ package senla.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
-import lombok.SneakyThrows;
 import org.springframework.web.bind.annotation.*;
 import senla.dto.order.OrderDTOToEntity;
-import senla.servise.OrderService;
+import senla.service.OrderService;
 @RestController
 @RequestMapping("/api/v1/orders")
 @RequiredArgsConstructor

@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import senla.dto.sessionrequest.SessionRequestDTOToEntity;
-import senla.servise.SessionRequestService;
+import senla.service.SessionRequestService;
 
 import java.io.IOException;
 
@@ -15,46 +15,12 @@ public class SessionRequestController {
 
     private final SessionRequestService sessionRequestService;
     private final ObjectMapper objectMapper;
-
-    @GetMapping
-    public String findAll() {
-        return serialize(sessionRequestService.findAll());
-    }
-
-    @GetMapping("/{id}")
-    public String findById(@PathVariable("id") Long id) {
-        return serialize(sessionRequestService.findById(id));
-    }
-
-    @PostMapping
-    public void save(@RequestBody String sessionRequestDTO) {
+    @PostMapping("/request-session")
+    public void requestSession(@RequestBody String sessionRequestDTO) {
         try {
-            sessionRequestService.save(deserialize(sessionRequestDTO));
+            sessionRequestService.requestSession(deserialize(sessionRequestDTO));
         } catch (IOException e) {
             e.printStackTrace();
-        }
-    }
-
-    @PutMapping("/{id}")
-    public void update(@PathVariable("id") long id, @RequestBody String updateDTO) {
-        try {
-            sessionRequestService.update(id, deserialize(updateDTO));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    @DeleteMapping("/{id}")
-    public void deleteById(@PathVariable("id") Long id) {
-        sessionRequestService.deleteById(id);
-    }
-
-    private String serialize(Object object) {
-        try {
-            return objectMapper.writeValueAsString(object);
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
         }
     }
 

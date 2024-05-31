@@ -15,14 +15,15 @@ import java.util.List;
 @Repository
 @Transactional
 public class ClientRepositoryImpl extends AbstractRepository<Long, Client> implements ClientRepository {
+
     public ClientRepositoryImpl() {
         super(Client.class);
     }
+
     @Override
     public List<Client> findAllWithDetails() {
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaQuery<Client> criteriaQuery = criteriaBuilder.createQuery(Client.class);
-        Root<Client> clientRoot = criteriaQuery.from(Client.class);
 
         EntityGraph<Client> entityGraph = entityManager.createEntityGraph(Client.class);
         entityGraph.addSubgraph("clientCard");

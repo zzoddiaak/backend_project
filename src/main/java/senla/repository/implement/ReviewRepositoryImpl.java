@@ -16,9 +16,11 @@ import java.util.List;
 @Repository
 @Transactional
 public class ReviewRepositoryImpl extends AbstractRepository<Long, Review> implements ReviewRepository {
+
     public ReviewRepositoryImpl() {
         super(Review.class);
     }
+
     @Override
     public List<Review> findAllWithFetch(int rating) {
         CriteriaBuilder cb = entityManager.getCriteriaBuilder();
@@ -28,14 +30,20 @@ public class ReviewRepositoryImpl extends AbstractRepository<Long, Review> imple
         cq.where(cb.equal(reviewRoot.get(Review_.rating), rating));
 
         return entityManager.createQuery(cq).getResultList();
+
     }
+
     @Override
     public List<Review> findAllWithJoinFetch(String commentReviews) {
+
         String jpql = "select u from Review u where u.commentReviews = :commentReviews";
+
         return entityManager.createQuery(jpql, Review.class)
                 .setParameter("commentReviews", commentReviews)
                 .getResultList();
+
     }
+
     @Override
     public List<Review> findAllWithDetails() {
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();

@@ -21,9 +21,6 @@ public class PermissionRepositoryImpl extends AbstractRepository<Long, Permissio
         super(Permission.class);
     }
 
-
-
-
     @Override
     public List<Permission> findAllWithJoinFetch(Role role) {
         String jpql = "select u from Permission u where u.role = :role";

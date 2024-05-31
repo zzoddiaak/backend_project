@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import senla.dto.role.RoleDTOToEntity;
-import senla.servise.RoleService;
+import senla.service.RoleService;
 
 import java.io.IOException;
 

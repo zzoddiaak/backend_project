@@ -15,9 +15,11 @@ import java.util.List;
 @Repository
 @Transactional
 public class PaymentStatusRepositpryImpl extends AbstractRepository<Long,PaymentStatus> implements PaymentStatusRepository {
+
     public PaymentStatusRepositpryImpl() {
         super(PaymentStatus.class);
     }
+
     @Override
     public List<PaymentStatus> findAllWithFetch(StatusPayment status) {
         CriteriaBuilder cb = entityManager.getCriteriaBuilder();
@@ -28,6 +30,7 @@ public class PaymentStatusRepositpryImpl extends AbstractRepository<Long,Payment
 
         return entityManager.createQuery(cq).getResultList();
     }
+
     @Override
     public List<PaymentStatus> findAllWithJoinFetch(StatusPayment status) {
         String jpql = "select u from PaymentStatus u where u.status = :status";

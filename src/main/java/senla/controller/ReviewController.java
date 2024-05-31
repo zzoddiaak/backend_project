@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import senla.dto.review.ReviewDTOToEntity;
-import senla.servise.ReviewService;
+import senla.service.ReviewService;
 
 import java.io.IOException;
 

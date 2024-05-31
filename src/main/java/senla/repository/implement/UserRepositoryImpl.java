@@ -53,17 +53,7 @@ public class UserRepositoryImpl extends AbstractRepository<Long, User> implement
         return typedQuery.getResultList();
     }
 
-    /*@Override
-    public User findByEmail(String email) {
-        final String jpql = "select u from User u where u.email = :email";
-        List<User> users = entityManager.createQuery(jpql, User.class)
-                .setParameter("email", email)
-                .getResultList();
-                if(users.isEmpty()){
-                    throw new UserNotFoundException(email);
-                }
-        return users.iterator().next();
-    }*/
+
     @Override
     public User findByEmail(String email) {
         final String jpql = "SELECT u FROM User u LEFT JOIN FETCH u.role WHERE u.email = :email";

@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import senla.dto.requeststatus.RequestStatusDTOToEntity;
-import senla.servise.RequestStatusService;
+import senla.service.RequestStatusService;
 
 import java.io.IOException;
 

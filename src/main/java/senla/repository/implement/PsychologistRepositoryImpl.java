@@ -17,10 +17,10 @@ import java.util.List;
 @Repository
 @Transactional
 public class PsychologistRepositoryImpl extends AbstractRepository<Long, Psychologist> implements PsychologistRepository {
-
     public PsychologistRepositoryImpl() {
         super(Psychologist.class);
     }
+
     @Override
     public List<Psychologist> findAllWithFetch(int experience) {
         CriteriaBuilder cb = entityManager.getCriteriaBuilder();
@@ -31,13 +31,16 @@ public class PsychologistRepositoryImpl extends AbstractRepository<Long, Psychol
 
         return entityManager.createQuery(cq).getResultList();
     }
+
     @Override
     public List<Psychologist> findAllWithJoinFetch(BigDecimal hourlyRate) {
         String jpql = "select u from Psychologist u where u.hourlyRate = :hourlyRate";
+
         return entityManager.createQuery(jpql, Psychologist.class)
                 .setParameter("hourlyRate", hourlyRate)
                 .getResultList();
     }
+
     @Override
     public List<Psychologist> findAllWithDetails() {
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();

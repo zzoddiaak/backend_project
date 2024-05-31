@@ -17,9 +17,11 @@ import java.util.List;
 @Transactional
 @Repository
 public class SessionRepositoryImpl extends AbstractRepository<Long, Session> implements SessionRepository {
+
     public SessionRepositoryImpl() {
         super(Session.class);
     }
+
     @Override
     public List<Session> findAllWithFetch(LocalDateTime startSession) {
         CriteriaBuilder cb = entityManager.getCriteriaBuilder();
@@ -30,6 +32,7 @@ public class SessionRepositoryImpl extends AbstractRepository<Long, Session> imp
 
         return entityManager.createQuery(cq).getResultList();
     }
+
     @Override
     public List<Session> findAllWithJoinFetch(LocalDateTime finalSession) {
         String jpql = "select u from Session u where u.finalSession = :finalSession";
@@ -37,11 +40,11 @@ public class SessionRepositoryImpl extends AbstractRepository<Long, Session> imp
                 .setParameter("finalSession", finalSession)
                 .getResultList();
     }
+
     @Override
     public List<Session> findAllWithDetails() {
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaQuery<Session> criteriaQuery = criteriaBuilder.createQuery(Session.class);
-        Root<Session> sessionRoot = criteriaQuery.from(Session.class);
 
         EntityGraph<Session> entityGraph = entityManager.createEntityGraph(Session.class);
         entityGraph.addSubgraph("client");

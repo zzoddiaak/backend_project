@@ -2,10 +2,9 @@ package senla.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
-import lombok.SneakyThrows;
 import org.springframework.web.bind.annotation.*;
 import senla.dto.course.CourseDTOToEntity;
-import senla.servise.CourseService;
+import senla.service.CourseService;
 @RequestMapping("/api/v1/courses")
 @RestController
 @RequiredArgsConstructor

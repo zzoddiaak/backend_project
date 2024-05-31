@@ -11,12 +11,14 @@ import jakarta.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Payment {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected Long id;
 
     @Column(name = "url")
     private String url;
+
 
     @ManyToOne(fetch=FetchType.LAZY,
             cascade = {CascadeType.REMOVE, CascadeType.MERGE})

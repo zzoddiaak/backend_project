@@ -12,6 +12,7 @@ import jakarta.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class PaymentStatus  {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected Long id;
@@ -19,4 +20,5 @@ public class PaymentStatus  {
     @Enumerated(EnumType.STRING)
     @Column(name = "status_name")
     private StatusPayment status;
+
 }

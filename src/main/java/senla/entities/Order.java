@@ -14,11 +14,14 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Order {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected Long id;
+
     @Column(name = "total_price")
     private BigDecimal totalPrice;
+
     @Column(name = "discounts")
     private BigDecimal discounts;
 

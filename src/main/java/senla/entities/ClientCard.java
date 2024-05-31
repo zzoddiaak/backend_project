@@ -11,13 +11,18 @@ import jakarta.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ClientCard {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected Long id;
+
     @Column(name = "diagnos")
     private String diagnos;
+
     @Column(name = "recommendations")
     private String recommendations;
+
+
     @ManyToOne(fetch=FetchType.LAZY,
             cascade = {CascadeType.REMOVE, CascadeType.MERGE})
     @JoinColumn(name = "psychologist_id", referencedColumnName = "id")

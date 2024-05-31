@@ -24,13 +24,17 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Review {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected Long id;
+
     @Column(name = "rating")
     private Integer rating;
+
     @Column(name = "comment_reviews")
     private String commentReviews;
+
 
     @ManyToOne(fetch=FetchType.LAZY,
             cascade = {CascadeType.REMOVE, CascadeType.MERGE})

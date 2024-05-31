@@ -14,9 +14,11 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Permission  {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected Long id;
+
     @Enumerated(EnumType.STRING)
     @Column(name = "permission_name")
     private PermissionType permissionType;

@@ -13,14 +13,17 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Session {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected Long id;
 
     @Column(name = "start_session")
     private LocalDateTime startSession;
+
     @Column(name = "final_session")
     private LocalDateTime finalSession;
+
 
     @ManyToOne(fetch=FetchType.LAZY,
             cascade = {CascadeType.REMOVE, CascadeType.MERGE})

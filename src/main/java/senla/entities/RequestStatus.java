@@ -11,9 +11,11 @@ import jakarta.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class RequestStatus  {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected Long id;
+
     @Enumerated(EnumType.STRING)
     @Column(name = "request_status")
     private StatusRequest requestStatus;
